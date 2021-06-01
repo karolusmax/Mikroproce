@@ -3,29 +3,29 @@ lab09.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000071a  00000000  00000000  00000094  2**1
+  0 .text         00000970  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000050  00800060  0000071a  000007ae  2**0
+  1 .data         00000068  00800060  00000970  00000a04  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000009  008000b0  008000b0  000007fe  2**0
+  2 .bss          0000000a  008000c8  008000c8  00000a6c  2**0
                   ALLOC
-  3 .debug_aranges 00000020  00000000  00000000  000007fe  2**0
+  3 .debug_aranges 00000020  00000000  00000000  00000a6c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_pubnames 00000132  00000000  00000000  0000081e  2**0
+  4 .debug_pubnames 0000015f  00000000  00000000  00000a8c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000574  00000000  00000000  00000950  2**0
+  5 .debug_info   0000060b  00000000  00000000  00000beb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000001d9  00000000  00000000  00000ec4  2**0
+  6 .debug_abbrev 0000021b  00000000  00000000  000011f6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000007d9  00000000  00000000  0000109d  2**0
+  7 .debug_line   000009aa  00000000  00000000  00001411  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000000f0  00000000  00000000  00001878  2**2
+  8 .debug_frame  00000120  00000000  00000000  00001dbc  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000019b  00000000  00000000  00001968  2**0
+  9 .debug_str    000001be  00000000  00000000  00001edc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000001a8  00000000  00000000  00001b03  2**0
+ 10 .debug_loc    000001a8  00000000  00000000  0000209a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000048  00000000  00000000  00001cab  2**0
+ 11 .debug_ranges 00000048  00000000  00000000  00002242  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -35,13 +35,13 @@ Disassembly of section .text:
    4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
    8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
    c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 3c 04 	jmp	0x878	; 0x878 <__vector_4>
   14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  28:	0c 94 51 03 	jmp	0x6a2	; 0x6a2 <__vector_10>
+  28:	0c 94 9c 03 	jmp	0x738	; 0x738 <__vector_10>
   2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -65,8 +65,8 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ea e1       	ldi	r30, 0x1A	; 26
-  68:	f7 e0       	ldi	r31, 0x07	; 7
+  66:	e0 e7       	ldi	r30, 0x70	; 112
+  68:	f9 e0       	ldi	r31, 0x09	; 9
   6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
 
 0000006c <.do_copy_data_loop>:
@@ -74,13 +74,13 @@ Disassembly of section .text:
   6e:	0d 92       	st	X+, r0
 
 00000070 <.do_copy_data_start>:
-  70:	a0 3b       	cpi	r26, 0xB0	; 176
+  70:	a8 3c       	cpi	r26, 0xC8	; 200
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
 
 00000076 <__do_clear_bss>:
   76:	10 e0       	ldi	r17, 0x00	; 0
-  78:	a0 eb       	ldi	r26, 0xB0	; 176
+  78:	a8 ec       	ldi	r26, 0xC8	; 200
   7a:	b0 e0       	ldi	r27, 0x00	; 0
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -88,24 +88,23 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	a9 3b       	cpi	r26, 0xB9	; 185
+  80:	a2 3d       	cpi	r26, 0xD2	; 210
   82:	b1 07       	cpc	r27, r17
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-  86:	0e 94 75 03 	call	0x6ea	; 0x6ea <main>
-  8a:	0c 94 8b 03 	jmp	0x716	; 0x716 <_exit>
+  86:	0e 94 c0 03 	call	0x780	; 0x780 <main>
+  8a:	0c 94 b6 04 	jmp	0x96c	; 0x96c <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000092 <wypisz>:
-char menuProgram=1;
 char menuPom=0;
 char progTrwa=0;
 char wykryjPrzycisk=0;
+uint8_t time=0;
 void wypisz(uint8_t b,int command_mode)
 {
   92:	28 2f       	mov	r18, r24
-	//uint8_t temp = LCD_PORT;
 	if(command_mode){
   94:	67 2b       	or	r22, r23
   96:	11 f0       	breq	.+4      	; 0x9c <wypisz+0xa>
@@ -158,11 +157,11 @@ _delay_loop_2(uint16_t __count)
 void czyscLCD()
 {
 	posX =0;
-  ca:	10 92 b8 00 	sts	0x00B8, r1
-  ce:	10 92 b7 00 	sts	0x00B7, r1
+  ca:	10 92 d1 00 	sts	0x00D1, r1
+  ce:	10 92 d0 00 	sts	0x00D0, r1
 	posY=0;
-  d2:	10 92 b6 00 	sts	0x00B6, r1
-  d6:	10 92 b5 00 	sts	0x00B5, r1
+  d2:	10 92 cf 00 	sts	0x00CF, r1
+  d6:	10 92 ce 00 	sts	0x00CE, r1
     //LCD_PORT &= ~(_BV(LCD_RS));
     wypisz(0x01,LCD_COMMAND);   //wysylamy polecenie wyczyszczenia
   da:	81 e0       	ldi	r24, 0x01	; 1
@@ -268,12 +267,12 @@ void ustawKursor(unsigned char w, unsigned char h)
  170:	0e 94 49 00 	call	0x92	; 0x92 <wypisz>
     //LCD_PORT |= _BV(LCD_RS);
 	posX = w;
- 174:	f0 92 b8 00 	sts	0x00B8, r15
- 178:	e0 92 b7 00 	sts	0x00B7, r14
+ 174:	f0 92 d1 00 	sts	0x00D1, r15
+ 178:	e0 92 d0 00 	sts	0x00D0, r14
 	posY = h;
  17c:	10 e0       	ldi	r17, 0x00	; 0
- 17e:	10 93 b6 00 	sts	0x00B6, r17
- 182:	00 93 b5 00 	sts	0x00B5, r16
+ 17e:	10 93 cf 00 	sts	0x00CF, r17
+ 182:	00 93 ce 00 	sts	0x00CE, r16
  186:	82 ee       	ldi	r24, 0xE2	; 226
  188:	94 e0       	ldi	r25, 0x04	; 4
  18a:	01 97       	sbiw	r24, 0x01	; 1
@@ -345,8 +344,8 @@ void czyscLCD_y(unsigned char y){
  1d0:	1f 93       	push	r17
  1d2:	08 2f       	mov	r16, r24
 	ustawKursor(posX,0);
- 1d4:	80 91 b7 00 	lds	r24, 0x00B7
- 1d8:	90 91 b8 00 	lds	r25, 0x00B8
+ 1d4:	80 91 d0 00 	lds	r24, 0x00D0
+ 1d8:	90 91 d1 00 	lds	r25, 0x00D1
  1dc:	60 e0       	ldi	r22, 0x00	; 0
  1de:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
  1e2:	10 e0       	ldi	r17, 0x00	; 0
@@ -389,826 +388,1210 @@ void czyscLCD_y(unsigned char y){
  20a:	0f 91       	pop	r16
  20c:	08 95       	ret
 
-0000020e <menu1>:
+0000020e <timer>:
+	if(progTrwa==3){
+		stoper();
+	}
+}
+void timer(){
+	if(time%2==0)
+ 20e:	80 91 cd 00 	lds	r24, 0x00CD
+ 212:	80 fd       	sbrc	r24, 0
+ 214:	03 c0       	rjmp	.+6      	; 0x21c <timer+0xe>
+		PORTC++;
+ 216:	85 b3       	in	r24, 0x15	; 21
+ 218:	8f 5f       	subi	r24, 0xFF	; 255
+ 21a:	85 bb       	out	0x15, r24	; 21
+ 21c:	08 95       	ret
+
+0000021e <menu1>:
 		}; 	
 	} 
 		
 }
 void menu1(){
 	menuProgram=1;
- 20e:	81 e0       	ldi	r24, 0x01	; 1
- 210:	80 93 ae 00 	sts	0x00AE, r24
+ 21e:	81 e0       	ldi	r24, 0x01	; 1
+ 220:	80 93 c7 00 	sts	0x00C7, r24
 	liniaMenu=1;
- 214:	80 93 ad 00 	sts	0x00AD, r24
+ 224:	80 93 c6 00 	sts	0x00C6, r24
 	czyscLCD();
- 218:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+ 228:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
 	ustawKursor(0,0);
- 21c:	80 e0       	ldi	r24, 0x00	; 0
- 21e:	60 e0       	ldi	r22, 0x00	; 0
- 220:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 22c:	80 e0       	ldi	r24, 0x00	; 0
+ 22e:	60 e0       	ldi	r22, 0x00	; 0
+ 230:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 	napisz("1. Przyciski",12);
- 224:	80 e6       	ldi	r24, 0x60	; 96
- 226:	90 e0       	ldi	r25, 0x00	; 0
- 228:	6c e0       	ldi	r22, 0x0C	; 12
- 22a:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 234:	80 e6       	ldi	r24, 0x60	; 96
+ 236:	90 e0       	ldi	r25, 0x00	; 0
+ 238:	6c e0       	ldi	r22, 0x0C	; 12
+ 23a:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 }
- 22e:	08 95       	ret
+ 23e:	08 95       	ret
 
-00000230 <menu2>:
+00000240 <menu2>:
 void menu2(){
 	switch(liniaMenu){
- 230:	80 91 ad 00 	lds	r24, 0x00AD
- 234:	81 30       	cpi	r24, 0x01	; 1
- 236:	19 f0       	breq	.+6      	; 0x23e <menu2+0xe>
- 238:	82 30       	cpi	r24, 0x02	; 2
- 23a:	e1 f5       	brne	.+120    	; 0x2b4 <menu2+0x84>
- 23c:	1e c0       	rjmp	.+60     	; 0x27a <menu2+0x4a>
+ 240:	80 91 c6 00 	lds	r24, 0x00C6
+ 244:	81 30       	cpi	r24, 0x01	; 1
+ 246:	19 f0       	breq	.+6      	; 0x24e <menu2+0xe>
+ 248:	82 30       	cpi	r24, 0x02	; 2
+ 24a:	e1 f5       	brne	.+120    	; 0x2c4 <menu2+0x84>
+ 24c:	1e c0       	rjmp	.+60     	; 0x28a <menu2+0x4a>
 	case 1:
 		czyscLCD();
- 23e:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+ 24e:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
 		ustawKursor(0,0);
- 242:	80 e0       	ldi	r24, 0x00	; 0
- 244:	60 e0       	ldi	r22, 0x00	; 0
- 246:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 252:	80 e0       	ldi	r24, 0x00	; 0
+ 254:	60 e0       	ldi	r22, 0x00	; 0
+ 256:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("2.1 Timer",9);
- 24a:	8d e6       	ldi	r24, 0x6D	; 109
- 24c:	90 e0       	ldi	r25, 0x00	; 0
- 24e:	69 e0       	ldi	r22, 0x09	; 9
- 250:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 25a:	8d e6       	ldi	r24, 0x6D	; 109
+ 25c:	90 e0       	ldi	r25, 0x00	; 0
+ 25e:	69 e0       	ldi	r22, 0x09	; 9
+ 260:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 		ustawKursor(1,0);
- 254:	81 e0       	ldi	r24, 0x01	; 1
- 256:	60 e0       	ldi	r22, 0x00	; 0
- 258:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 264:	81 e0       	ldi	r24, 0x01	; 1
+ 266:	60 e0       	ldi	r22, 0x00	; 0
+ 268:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("2.2 Stoper",10);
- 25c:	87 e7       	ldi	r24, 0x77	; 119
- 25e:	90 e0       	ldi	r25, 0x00	; 0
- 260:	6a e0       	ldi	r22, 0x0A	; 10
- 262:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 26c:	87 e7       	ldi	r24, 0x77	; 119
+ 26e:	90 e0       	ldi	r25, 0x00	; 0
+ 270:	6a e0       	ldi	r22, 0x0A	; 10
+ 272:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 		ustawKursor(0,15);
- 266:	80 e0       	ldi	r24, 0x00	; 0
- 268:	6f e0       	ldi	r22, 0x0F	; 15
- 26a:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 276:	80 e0       	ldi	r24, 0x00	; 0
+ 278:	6f e0       	ldi	r22, 0x0F	; 15
+ 27a:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("*",1);
- 26e:	82 e8       	ldi	r24, 0x82	; 130
- 270:	90 e0       	ldi	r25, 0x00	; 0
- 272:	61 e0       	ldi	r22, 0x01	; 1
- 274:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
- 278:	08 95       	ret
+ 27e:	82 e8       	ldi	r24, 0x82	; 130
+ 280:	90 e0       	ldi	r25, 0x00	; 0
+ 282:	61 e0       	ldi	r22, 0x01	; 1
+ 284:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 288:	08 95       	ret
 	break;
 	case 2:
 		czyscLCD();
- 27a:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+ 28a:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
 		ustawKursor(0,0);
- 27e:	80 e0       	ldi	r24, 0x00	; 0
- 280:	60 e0       	ldi	r22, 0x00	; 0
- 282:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 28e:	80 e0       	ldi	r24, 0x00	; 0
+ 290:	60 e0       	ldi	r22, 0x00	; 0
+ 292:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("2.1 Timer",9);
- 286:	8d e6       	ldi	r24, 0x6D	; 109
- 288:	90 e0       	ldi	r25, 0x00	; 0
- 28a:	69 e0       	ldi	r22, 0x09	; 9
- 28c:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 296:	8d e6       	ldi	r24, 0x6D	; 109
+ 298:	90 e0       	ldi	r25, 0x00	; 0
+ 29a:	69 e0       	ldi	r22, 0x09	; 9
+ 29c:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 		ustawKursor(1,0);
- 290:	81 e0       	ldi	r24, 0x01	; 1
- 292:	60 e0       	ldi	r22, 0x00	; 0
- 294:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 2a0:	81 e0       	ldi	r24, 0x01	; 1
+ 2a2:	60 e0       	ldi	r22, 0x00	; 0
+ 2a4:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("2.2 Stoper",10);
- 298:	87 e7       	ldi	r24, 0x77	; 119
- 29a:	90 e0       	ldi	r25, 0x00	; 0
- 29c:	6a e0       	ldi	r22, 0x0A	; 10
- 29e:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 2a8:	87 e7       	ldi	r24, 0x77	; 119
+ 2aa:	90 e0       	ldi	r25, 0x00	; 0
+ 2ac:	6a e0       	ldi	r22, 0x0A	; 10
+ 2ae:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 		ustawKursor(1,15);
- 2a2:	81 e0       	ldi	r24, 0x01	; 1
- 2a4:	6f e0       	ldi	r22, 0x0F	; 15
- 2a6:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 2b2:	81 e0       	ldi	r24, 0x01	; 1
+ 2b4:	6f e0       	ldi	r22, 0x0F	; 15
+ 2b6:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("*",1);
- 2aa:	82 e8       	ldi	r24, 0x82	; 130
- 2ac:	90 e0       	ldi	r25, 0x00	; 0
- 2ae:	61 e0       	ldi	r22, 0x01	; 1
- 2b0:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
- 2b4:	08 95       	ret
+ 2ba:	82 e8       	ldi	r24, 0x82	; 130
+ 2bc:	90 e0       	ldi	r25, 0x00	; 0
+ 2be:	61 e0       	ldi	r22, 0x01	; 1
+ 2c0:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 2c4:	08 95       	ret
 
-000002b6 <menu3>:
+000002c6 <menu3>:
 	default:
 		break;
 	};
 }
 void menu3(){
 	switch(liniaMenu){
- 2b6:	80 91 ad 00 	lds	r24, 0x00AD
- 2ba:	81 30       	cpi	r24, 0x01	; 1
- 2bc:	19 f0       	breq	.+6      	; 0x2c4 <menu3+0xe>
- 2be:	82 30       	cpi	r24, 0x02	; 2
- 2c0:	e1 f5       	brne	.+120    	; 0x33a <menu3+0x84>
- 2c2:	1e c0       	rjmp	.+60     	; 0x300 <menu3+0x4a>
+ 2c6:	80 91 c6 00 	lds	r24, 0x00C6
+ 2ca:	81 30       	cpi	r24, 0x01	; 1
+ 2cc:	19 f0       	breq	.+6      	; 0x2d4 <menu3+0xe>
+ 2ce:	82 30       	cpi	r24, 0x02	; 2
+ 2d0:	e1 f5       	brne	.+120    	; 0x34a <menu3+0x84>
+ 2d2:	1e c0       	rjmp	.+60     	; 0x310 <menu3+0x4a>
 	case 1:
 		czyscLCD();
- 2c4:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+ 2d4:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
 		ustawKursor(0,0);
- 2c8:	80 e0       	ldi	r24, 0x00	; 0
- 2ca:	60 e0       	ldi	r22, 0x00	; 0
- 2cc:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 2d8:	80 e0       	ldi	r24, 0x00	; 0
+ 2da:	60 e0       	ldi	r22, 0x00	; 0
+ 2dc:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("Menu 1",6);
- 2d0:	84 e8       	ldi	r24, 0x84	; 132
- 2d2:	90 e0       	ldi	r25, 0x00	; 0
- 2d4:	66 e0       	ldi	r22, 0x06	; 6
- 2d6:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 2e0:	84 e8       	ldi	r24, 0x84	; 132
+ 2e2:	90 e0       	ldi	r25, 0x00	; 0
+ 2e4:	66 e0       	ldi	r22, 0x06	; 6
+ 2e6:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 		ustawKursor(1,0);
- 2da:	81 e0       	ldi	r24, 0x01	; 1
- 2dc:	60 e0       	ldi	r22, 0x00	; 0
- 2de:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 2ea:	81 e0       	ldi	r24, 0x01	; 1
+ 2ec:	60 e0       	ldi	r22, 0x00	; 0
+ 2ee:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("3.1 Diody",9);
- 2e2:	8b e8       	ldi	r24, 0x8B	; 139
- 2e4:	90 e0       	ldi	r25, 0x00	; 0
- 2e6:	69 e0       	ldi	r22, 0x09	; 9
- 2e8:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 2f2:	8b e8       	ldi	r24, 0x8B	; 139
+ 2f4:	90 e0       	ldi	r25, 0x00	; 0
+ 2f6:	69 e0       	ldi	r22, 0x09	; 9
+ 2f8:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 		ustawKursor(0,15);
- 2ec:	80 e0       	ldi	r24, 0x00	; 0
- 2ee:	6f e0       	ldi	r22, 0x0F	; 15
- 2f0:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 2fc:	80 e0       	ldi	r24, 0x00	; 0
+ 2fe:	6f e0       	ldi	r22, 0x0F	; 15
+ 300:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("*",1);
- 2f4:	82 e8       	ldi	r24, 0x82	; 130
- 2f6:	90 e0       	ldi	r25, 0x00	; 0
- 2f8:	61 e0       	ldi	r22, 0x01	; 1
- 2fa:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
- 2fe:	08 95       	ret
+ 304:	82 e8       	ldi	r24, 0x82	; 130
+ 306:	90 e0       	ldi	r25, 0x00	; 0
+ 308:	61 e0       	ldi	r22, 0x01	; 1
+ 30a:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 30e:	08 95       	ret
 	break;
 	case 2:
 		czyscLCD();
- 300:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+ 310:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
 		ustawKursor(0,0);
- 304:	80 e0       	ldi	r24, 0x00	; 0
- 306:	60 e0       	ldi	r22, 0x00	; 0
- 308:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 314:	80 e0       	ldi	r24, 0x00	; 0
+ 316:	60 e0       	ldi	r22, 0x00	; 0
+ 318:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("Menu 1",6);
- 30c:	84 e8       	ldi	r24, 0x84	; 132
- 30e:	90 e0       	ldi	r25, 0x00	; 0
- 310:	66 e0       	ldi	r22, 0x06	; 6
- 312:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 31c:	84 e8       	ldi	r24, 0x84	; 132
+ 31e:	90 e0       	ldi	r25, 0x00	; 0
+ 320:	66 e0       	ldi	r22, 0x06	; 6
+ 322:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 		ustawKursor(1,0);
- 316:	81 e0       	ldi	r24, 0x01	; 1
- 318:	60 e0       	ldi	r22, 0x00	; 0
- 31a:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 326:	81 e0       	ldi	r24, 0x01	; 1
+ 328:	60 e0       	ldi	r22, 0x00	; 0
+ 32a:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("3.1 Diody",9);
- 31e:	8b e8       	ldi	r24, 0x8B	; 139
- 320:	90 e0       	ldi	r25, 0x00	; 0
- 322:	69 e0       	ldi	r22, 0x09	; 9
- 324:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 32e:	8b e8       	ldi	r24, 0x8B	; 139
+ 330:	90 e0       	ldi	r25, 0x00	; 0
+ 332:	69 e0       	ldi	r22, 0x09	; 9
+ 334:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 		ustawKursor(1,15);
- 328:	81 e0       	ldi	r24, 0x01	; 1
- 32a:	6f e0       	ldi	r22, 0x0F	; 15
- 32c:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 338:	81 e0       	ldi	r24, 0x01	; 1
+ 33a:	6f e0       	ldi	r22, 0x0F	; 15
+ 33c:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 		napisz("*",1);
- 330:	82 e8       	ldi	r24, 0x82	; 130
- 332:	90 e0       	ldi	r25, 0x00	; 0
- 334:	61 e0       	ldi	r22, 0x01	; 1
- 336:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
- 33a:	08 95       	ret
+ 340:	82 e8       	ldi	r24, 0x82	; 130
+ 342:	90 e0       	ldi	r25, 0x00	; 0
+ 344:	61 e0       	ldi	r22, 0x01	; 1
+ 346:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 34a:	08 95       	ret
 
-0000033c <menu>:
-		//PORTC = liniaMenu;
+0000034c <menu>:
+		};	
 	}
 }
 
 void menu(){
+	PORTC=0x00;
+ 34c:	15 ba       	out	0x15, r1	; 21
 	if (idMenu == 0){
- 33c:	80 91 b1 00 	lds	r24, 0x00B1
- 340:	88 23       	and	r24, r24
- 342:	09 f0       	breq	.+2      	; 0x346 <menu+0xa>
- 344:	54 c0       	rjmp	.+168    	; 0x3ee <menu+0xb2>
+ 34e:	80 91 c9 00 	lds	r24, 0x00C9
+ 352:	88 23       	and	r24, r24
+ 354:	09 f0       	breq	.+2      	; 0x358 <menu+0xc>
+ 356:	54 c0       	rjmp	.+168    	; 0x400 <menu+0xb4>
 		menuProgram=1;
- 346:	81 e0       	ldi	r24, 0x01	; 1
- 348:	80 93 ae 00 	sts	0x00AE, r24
+ 358:	81 e0       	ldi	r24, 0x01	; 1
+ 35a:	80 93 c7 00 	sts	0x00C7, r24
 		menuPom=0;
- 34c:	10 92 b2 00 	sts	0x00B2, r1
+ 35e:	10 92 ca 00 	sts	0x00CA, r1
 		switch(liniaMenu){
- 350:	80 91 ad 00 	lds	r24, 0x00AD
- 354:	82 30       	cpi	r24, 0x02	; 2
- 356:	d9 f0       	breq	.+54     	; 0x38e <menu+0x52>
- 358:	83 30       	cpi	r24, 0x03	; 3
- 35a:	59 f1       	breq	.+86     	; 0x3b2 <menu+0x76>
- 35c:	81 30       	cpi	r24, 0x01	; 1
- 35e:	09 f0       	breq	.+2      	; 0x362 <menu+0x26>
- 360:	64 c0       	rjmp	.+200    	; 0x42a <menu+0xee>
+ 362:	80 91 c6 00 	lds	r24, 0x00C6
+ 366:	82 30       	cpi	r24, 0x02	; 2
+ 368:	d9 f0       	breq	.+54     	; 0x3a0 <menu+0x54>
+ 36a:	83 30       	cpi	r24, 0x03	; 3
+ 36c:	59 f1       	breq	.+86     	; 0x3c4 <menu+0x78>
+ 36e:	81 30       	cpi	r24, 0x01	; 1
+ 370:	09 f0       	breq	.+2      	; 0x374 <menu+0x28>
+ 372:	64 c0       	rjmp	.+200    	; 0x43c <menu+0xf0>
 		case 1:
 			czyscLCD();
- 362:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+ 374:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
 			ustawKursor(0,0);
- 366:	80 e0       	ldi	r24, 0x00	; 0
- 368:	60 e0       	ldi	r22, 0x00	; 0
- 36a:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
-			napisz("Menu1",5);
- 36e:	85 e9       	ldi	r24, 0x95	; 149
- 370:	90 e0       	ldi	r25, 0x00	; 0
- 372:	65 e0       	ldi	r22, 0x05	; 5
- 374:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
-			ustawKursor(1,0);
- 378:	81 e0       	ldi	r24, 0x01	; 1
+ 378:	80 e0       	ldi	r24, 0x00	; 0
  37a:	60 e0       	ldi	r22, 0x00	; 0
  37c:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
-			napisz("Menu2",5);
- 380:	8b e9       	ldi	r24, 0x9B	; 155
+			napisz("Menu1",5);
+ 380:	85 e9       	ldi	r24, 0x95	; 149
  382:	90 e0       	ldi	r25, 0x00	; 0
  384:	65 e0       	ldi	r22, 0x05	; 5
  386:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+			ustawKursor(1,0);
+ 38a:	81 e0       	ldi	r24, 0x01	; 1
+ 38c:	60 e0       	ldi	r22, 0x00	; 0
+ 38e:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+			napisz("Menu2",5);
+ 392:	8b e9       	ldi	r24, 0x9B	; 155
+ 394:	90 e0       	ldi	r25, 0x00	; 0
+ 396:	65 e0       	ldi	r22, 0x05	; 5
+ 398:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
 			ustawKursor(0,15);
- 38a:	80 e0       	ldi	r24, 0x00	; 0
- 38c:	27 c0       	rjmp	.+78     	; 0x3dc <menu+0xa0>
+ 39c:	80 e0       	ldi	r24, 0x00	; 0
+ 39e:	27 c0       	rjmp	.+78     	; 0x3ee <menu+0xa2>
 			napisz("*",1);
 			break;
 		case 2:
 			czyscLCD();
- 38e:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+ 3a0:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
 			ustawKursor(0,0);
- 392:	80 e0       	ldi	r24, 0x00	; 0
- 394:	60 e0       	ldi	r22, 0x00	; 0
- 396:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
-			napisz("Menu1",5);
- 39a:	85 e9       	ldi	r24, 0x95	; 149
- 39c:	90 e0       	ldi	r25, 0x00	; 0
- 39e:	65 e0       	ldi	r22, 0x05	; 5
- 3a0:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
-			ustawKursor(1,0);
- 3a4:	81 e0       	ldi	r24, 0x01	; 1
+ 3a4:	80 e0       	ldi	r24, 0x00	; 0
  3a6:	60 e0       	ldi	r22, 0x00	; 0
  3a8:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
-			napisz("Menu2",5);
- 3ac:	8b e9       	ldi	r24, 0x9B	; 155
+			napisz("Menu1",5);
+ 3ac:	85 e9       	ldi	r24, 0x95	; 149
  3ae:	90 e0       	ldi	r25, 0x00	; 0
- 3b0:	11 c0       	rjmp	.+34     	; 0x3d4 <menu+0x98>
-			ustawKursor(1,15);
-			napisz("*",1);
-			break;
-		case 3:
-			czyscLCD();
- 3b2:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
-			ustawKursor(0,0);
- 3b6:	80 e0       	ldi	r24, 0x00	; 0
+ 3b0:	65 e0       	ldi	r22, 0x05	; 5
+ 3b2:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+			ustawKursor(1,0);
+ 3b6:	81 e0       	ldi	r24, 0x01	; 1
  3b8:	60 e0       	ldi	r22, 0x00	; 0
  3ba:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 			napisz("Menu2",5);
  3be:	8b e9       	ldi	r24, 0x9B	; 155
  3c0:	90 e0       	ldi	r25, 0x00	; 0
- 3c2:	65 e0       	ldi	r22, 0x05	; 5
- 3c4:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
-			ustawKursor(1,0);
- 3c8:	81 e0       	ldi	r24, 0x01	; 1
+ 3c2:	11 c0       	rjmp	.+34     	; 0x3e6 <menu+0x9a>
+			ustawKursor(1,15);
+			napisz("*",1);
+			break;
+		case 3:
+			czyscLCD();
+ 3c4:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+			ustawKursor(0,0);
+ 3c8:	80 e0       	ldi	r24, 0x00	; 0
  3ca:	60 e0       	ldi	r22, 0x00	; 0
  3cc:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
-			napisz("Menu3",5);
- 3d0:	81 ea       	ldi	r24, 0xA1	; 161
+			napisz("Menu2",5);
+ 3d0:	8b e9       	ldi	r24, 0x9B	; 155
  3d2:	90 e0       	ldi	r25, 0x00	; 0
  3d4:	65 e0       	ldi	r22, 0x05	; 5
  3d6:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
-			ustawKursor(1,15);
+			ustawKursor(1,0);
  3da:	81 e0       	ldi	r24, 0x01	; 1
- 3dc:	6f e0       	ldi	r22, 0x0F	; 15
+ 3dc:	60 e0       	ldi	r22, 0x00	; 0
  3de:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
-			napisz("*",1);
- 3e2:	82 e8       	ldi	r24, 0x82	; 130
+			napisz("Menu3",5);
+ 3e2:	81 ea       	ldi	r24, 0xA1	; 161
  3e4:	90 e0       	ldi	r25, 0x00	; 0
- 3e6:	61 e0       	ldi	r22, 0x01	; 1
+ 3e6:	65 e0       	ldi	r22, 0x05	; 5
  3e8:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
- 3ec:	08 95       	ret
+			ustawKursor(1,15);
+ 3ec:	81 e0       	ldi	r24, 0x01	; 1
+ 3ee:	6f e0       	ldi	r22, 0x0F	; 15
+ 3f0:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+			napisz("*",1);
+ 3f4:	82 e8       	ldi	r24, 0x82	; 130
+ 3f6:	90 e0       	ldi	r25, 0x00	; 0
+ 3f8:	61 e0       	ldi	r22, 0x01	; 1
+ 3fa:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 3fe:	08 95       	ret
 			break;
 		default:
 			break;
 		}; 
 	} else if(idMenu==1 && menuProgram==1){
- 3ee:	81 30       	cpi	r24, 0x01	; 1
- 3f0:	e1 f4       	brne	.+56     	; 0x42a <menu+0xee>
- 3f2:	90 91 ae 00 	lds	r25, 0x00AE
- 3f6:	91 30       	cpi	r25, 0x01	; 1
- 3f8:	c1 f4       	brne	.+48     	; 0x42a <menu+0xee>
+ 400:	81 30       	cpi	r24, 0x01	; 1
+ 402:	e1 f4       	brne	.+56     	; 0x43c <menu+0xf0>
+ 404:	90 91 c7 00 	lds	r25, 0x00C7
+ 408:	91 30       	cpi	r25, 0x01	; 1
+ 40a:	c1 f4       	brne	.+48     	; 0x43c <menu+0xf0>
 		switch(liniaMenu){
- 3fa:	80 91 ad 00 	lds	r24, 0x00AD
- 3fe:	82 30       	cpi	r24, 0x02	; 2
- 400:	39 f0       	breq	.+14     	; 0x410 <menu+0xd4>
- 402:	83 30       	cpi	r24, 0x03	; 3
- 404:	61 f0       	breq	.+24     	; 0x41e <menu+0xe2>
- 406:	81 30       	cpi	r24, 0x01	; 1
- 408:	81 f4       	brne	.+32     	; 0x42a <menu+0xee>
+ 40c:	80 91 c6 00 	lds	r24, 0x00C6
+ 410:	82 30       	cpi	r24, 0x02	; 2
+ 412:	39 f0       	breq	.+14     	; 0x422 <menu+0xd6>
+ 414:	83 30       	cpi	r24, 0x03	; 3
+ 416:	61 f0       	breq	.+24     	; 0x430 <menu+0xe4>
+ 418:	81 30       	cpi	r24, 0x01	; 1
+ 41a:	81 f4       	brne	.+32     	; 0x43c <menu+0xf0>
 		case 1:
 			menu1();
- 40a:	0e 94 07 01 	call	0x20e	; 0x20e <menu1>
- 40e:	08 95       	ret
+ 41c:	0e 94 0f 01 	call	0x21e	; 0x21e <menu1>
+ 420:	08 95       	ret
 			break;
 		case 2:
 			menuProgram=2;
- 410:	80 93 ae 00 	sts	0x00AE, r24
+ 422:	80 93 c7 00 	sts	0x00C7, r24
 			liniaMenu=1;
- 414:	90 93 ad 00 	sts	0x00AD, r25
+ 426:	90 93 c6 00 	sts	0x00C6, r25
 			menu2();
- 418:	0e 94 18 01 	call	0x230	; 0x230 <menu2>
- 41c:	08 95       	ret
+ 42a:	0e 94 20 01 	call	0x240	; 0x240 <menu2>
+ 42e:	08 95       	ret
 			break;
 		case 3:
 			menuProgram=3;
- 41e:	80 93 ae 00 	sts	0x00AE, r24
+ 430:	80 93 c7 00 	sts	0x00C7, r24
 			liniaMenu=1;
- 422:	90 93 ad 00 	sts	0x00AD, r25
+ 434:	90 93 c6 00 	sts	0x00C6, r25
 			menu3();
- 426:	0e 94 5b 01 	call	0x2b6	; 0x2b6 <menu3>
- 42a:	08 95       	ret
+ 438:	0e 94 63 01 	call	0x2c6	; 0x2c6 <menu3>
+ 43c:	08 95       	ret
 
-0000042c <diody>:
+0000043e <diody>:
 		break;
 	};
 }
 
 void diody(){ //zad3 lab1
 	PORTC=0b10000000; // ustawienie stanu bitu 7
- 42c:	80 e8       	ldi	r24, 0x80	; 128
- 42e:	85 bb       	out	0x15, r24	; 21
- 430:	47 e0       	ldi	r20, 0x07	; 7
- 432:	50 e0       	ldi	r21, 0x00	; 0
- 434:	a9 e1       	ldi	r26, 0x19	; 25
- 436:	b0 e0       	ldi	r27, 0x00	; 0
+ 43e:	80 e8       	ldi	r24, 0x80	; 128
+ 440:	85 bb       	out	0x15, r24	; 21
+ 442:	47 e0       	ldi	r20, 0x07	; 7
+ 444:	50 e0       	ldi	r21, 0x00	; 0
+ 446:	a9 e1       	ldi	r26, 0x19	; 25
+ 448:	b0 e0       	ldi	r27, 0x00	; 0
     for (int i = 7; i >= 0 ; i--){
        _delay_ms(300);
        PORTC^=_BV(i-1); ;
- 438:	61 e0       	ldi	r22, 0x01	; 1
- 43a:	70 e0       	ldi	r23, 0x00	; 0
- 43c:	15 c0       	rjmp	.+42     	; 0x468 <diody+0x3c>
- 43e:	fd 01       	movw	r30, r26
- 440:	31 97       	sbiw	r30, 0x01	; 1
- 442:	f1 f7       	brne	.-4      	; 0x440 <diody+0x14>
+ 44a:	61 e0       	ldi	r22, 0x01	; 1
+ 44c:	70 e0       	ldi	r23, 0x00	; 0
+ 44e:	15 c0       	rjmp	.+42     	; 0x47a <diody+0x3c>
+ 450:	fd 01       	movw	r30, r26
+ 452:	31 97       	sbiw	r30, 0x01	; 1
+ 454:	f1 f7       	brne	.-4      	; 0x452 <diody+0x14>
 		__ticks = (uint16_t) (__ms * 10.0);
 		while(__ticks)
 		{
 			// wait 1/10 ms
 			_delay_loop_2(((F_CPU) / 4e3) / 10);
 			__ticks --;
- 444:	01 97       	sbiw	r24, 0x01	; 1
+ 456:	01 97       	sbiw	r24, 0x01	; 1
 		__ticks = 1;
 	else if (__tmp > 65535)
 	{
 		//	__ticks = requested delay in 1/10 ms
 		__ticks = (uint16_t) (__ms * 10.0);
 		while(__ticks)
- 446:	d9 f7       	brne	.-10     	; 0x43e <diody+0x12>
- 448:	25 b3       	in	r18, 0x15	; 21
- 44a:	41 50       	subi	r20, 0x01	; 1
- 44c:	50 40       	sbci	r21, 0x00	; 0
- 44e:	cb 01       	movw	r24, r22
- 450:	04 2e       	mov	r0, r20
- 452:	02 c0       	rjmp	.+4      	; 0x458 <diody+0x2c>
- 454:	88 0f       	add	r24, r24
- 456:	99 1f       	adc	r25, r25
- 458:	0a 94       	dec	r0
- 45a:	e2 f7       	brpl	.-8      	; 0x454 <diody+0x28>
- 45c:	28 27       	eor	r18, r24
- 45e:	25 bb       	out	0x15, r18	; 21
+ 458:	d9 f7       	brne	.-10     	; 0x450 <diody+0x12>
+ 45a:	25 b3       	in	r18, 0x15	; 21
+ 45c:	41 50       	subi	r20, 0x01	; 1
+ 45e:	50 40       	sbci	r21, 0x00	; 0
+ 460:	cb 01       	movw	r24, r22
+ 462:	04 2e       	mov	r0, r20
+ 464:	02 c0       	rjmp	.+4      	; 0x46a <diody+0x2c>
+ 466:	88 0f       	add	r24, r24
+ 468:	99 1f       	adc	r25, r25
+ 46a:	0a 94       	dec	r0
+ 46c:	e2 f7       	brpl	.-8      	; 0x466 <diody+0x28>
+ 46e:	28 27       	eor	r18, r24
+ 470:	25 bb       	out	0x15, r18	; 21
 	};
 }
 
 void diody(){ //zad3 lab1
 	PORTC=0b10000000; // ustawienie stanu bitu 7
     for (int i = 7; i >= 0 ; i--){
- 460:	8f ef       	ldi	r24, 0xFF	; 255
- 462:	4f 3f       	cpi	r20, 0xFF	; 255
- 464:	58 07       	cpc	r21, r24
- 466:	19 f0       	breq	.+6      	; 0x46e <diody+0x42>
- 468:	88 eb       	ldi	r24, 0xB8	; 184
- 46a:	9b e0       	ldi	r25, 0x0B	; 11
- 46c:	e8 cf       	rjmp	.-48     	; 0x43e <diody+0x12>
- 46e:	08 95       	ret
+ 472:	8f ef       	ldi	r24, 0xFF	; 255
+ 474:	4f 3f       	cpi	r20, 0xFF	; 255
+ 476:	58 07       	cpc	r21, r24
+ 478:	19 f0       	breq	.+6      	; 0x480 <diody+0x42>
+ 47a:	88 eb       	ldi	r24, 0xB8	; 184
+ 47c:	9b e0       	ldi	r25, 0x0B	; 11
+ 47e:	e8 cf       	rjmp	.-48     	; 0x450 <diody+0x12>
+ 480:	08 95       	ret
 
-00000470 <klawiatura>:
+00000482 <klawiatura>:
+			napisz(bufor,2);
+		}
+		PORTC++;
+	}
 }
-/*
-ISR(TIMER2_COMP_vect) { // przerwanie timer2
-}
-*/
 void klawiatura(){
- 470:	ef 92       	push	r14
- 472:	ff 92       	push	r15
- 474:	1f 93       	push	r17
- 476:	cf 93       	push	r28
- 478:	df 93       	push	r29
- 47a:	c4 e0       	ldi	r28, 0x04	; 4
- 47c:	d0 e0       	ldi	r29, 0x00	; 0
+ 482:	ef 92       	push	r14
+ 484:	ff 92       	push	r15
+ 486:	0f 93       	push	r16
+ 488:	1f 93       	push	r17
+ 48a:	cf 93       	push	r28
+ 48c:	df 93       	push	r29
+ 48e:	c4 e0       	ldi	r28, 0x04	; 4
+ 490:	d0 e0       	ldi	r29, 0x00	; 0
 	uint8_t i,wyjscie = 0x00;
 	for (i=4 ; i<8 ; i++){
 	    PORTA = ~_BV(i); // u¿ycie makra
- 47e:	31 e0       	ldi	r19, 0x01	; 1
- 480:	e3 2e       	mov	r14, r19
- 482:	f1 2c       	mov	r15, r1
- 484:	c7 01       	movw	r24, r14
- 486:	0c 2e       	mov	r0, r28
- 488:	02 c0       	rjmp	.+4      	; 0x48e <klawiatura+0x1e>
- 48a:	88 0f       	add	r24, r24
- 48c:	99 1f       	adc	r25, r25
- 48e:	0a 94       	dec	r0
- 490:	e2 f7       	brpl	.-8      	; 0x48a <klawiatura+0x1a>
- 492:	80 95       	com	r24
- 494:	8b bb       	out	0x1b, r24	; 27
+ 492:	31 e0       	ldi	r19, 0x01	; 1
+ 494:	e3 2e       	mov	r14, r19
+ 496:	f1 2c       	mov	r15, r1
+					if (menuProgram==2 && idMenu==2 && liniaMenu==2){
+						//stoper
+						/* ustaw zmienn¹, ¿eby zezwoliæ na obs³ugê 5 i 6
+						wykryjPrzycisk=2; 
+						*/
+						progTrwa=3;
+ 498:	03 e0       	ldi	r16, 0x03	; 3
+	}
+}
+void klawiatura(){
+	uint8_t i,wyjscie = 0x00;
+	for (i=4 ; i<8 ; i++){
+	    PORTA = ~_BV(i); // u¿ycie makra
+ 49a:	c7 01       	movw	r24, r14
+ 49c:	0c 2e       	mov	r0, r28
+ 49e:	02 c0       	rjmp	.+4      	; 0x4a4 <klawiatura+0x22>
+ 4a0:	88 0f       	add	r24, r24
+ 4a2:	99 1f       	adc	r25, r25
+ 4a4:	0a 94       	dec	r0
+ 4a6:	e2 f7       	brpl	.-8      	; 0x4a0 <klawiatura+0x1e>
+ 4a8:	80 95       	com	r24
+ 4aa:	8b bb       	out	0x1b, r24	; 27
 	    stan = PINA & 0x0F; // odczytanie stanu PINA i maskowanie
- 496:	89 b3       	in	r24, 0x19	; 25
- 498:	8f 70       	andi	r24, 0x0F	; 15
- 49a:	80 93 b0 00 	sts	0x00B0, r24
+ 4ac:	89 b3       	in	r24, 0x19	; 25
+ 4ae:	8f 70       	andi	r24, 0x0F	; 15
+ 4b0:	80 93 c8 00 	sts	0x00C8, r24
 		switch(stan) { // dopasowanie stanu PINA do dzia³ania programu
- 49e:	80 91 b0 00 	lds	r24, 0x00B0
- 4a2:	8b 30       	cpi	r24, 0x0B	; 11
- 4a4:	09 f4       	brne	.+2      	; 0x4a8 <klawiatura+0x38>
- 4a6:	7f c0       	rjmp	.+254    	; 0x5a6 <klawiatura+0x136>
- 4a8:	8c 30       	cpi	r24, 0x0C	; 12
- 4aa:	20 f4       	brcc	.+8      	; 0x4b4 <klawiatura+0x44>
- 4ac:	87 30       	cpi	r24, 0x07	; 7
- 4ae:	09 f0       	breq	.+2      	; 0x4b2 <klawiatura+0x42>
- 4b0:	ed c0       	rjmp	.+474    	; 0x68c <klawiatura+0x21c>
- 4b2:	af c0       	rjmp	.+350    	; 0x612 <klawiatura+0x1a2>
- 4b4:	8d 30       	cpi	r24, 0x0D	; 13
- 4b6:	b9 f1       	breq	.+110    	; 0x526 <klawiatura+0xb6>
- 4b8:	8e 30       	cpi	r24, 0x0E	; 14
- 4ba:	09 f0       	breq	.+2      	; 0x4be <klawiatura+0x4e>
- 4bc:	e7 c0       	rjmp	.+462    	; 0x68c <klawiatura+0x21c>
+ 4b4:	80 91 c8 00 	lds	r24, 0x00C8
+ 4b8:	8b 30       	cpi	r24, 0x0B	; 11
+ 4ba:	09 f4       	brne	.+2      	; 0x4be <klawiatura+0x3c>
+ 4bc:	7f c0       	rjmp	.+254    	; 0x5bc <klawiatura+0x13a>
+ 4be:	8c 30       	cpi	r24, 0x0C	; 12
+ 4c0:	20 f4       	brcc	.+8      	; 0x4ca <klawiatura+0x48>
+ 4c2:	87 30       	cpi	r24, 0x07	; 7
+ 4c4:	09 f0       	breq	.+2      	; 0x4c8 <klawiatura+0x46>
+ 4c6:	26 c1       	rjmp	.+588    	; 0x714 <klawiatura+0x292>
+ 4c8:	b2 c0       	rjmp	.+356    	; 0x62e <klawiatura+0x1ac>
+ 4ca:	8d 30       	cpi	r24, 0x0D	; 13
+ 4cc:	b9 f1       	breq	.+110    	; 0x53c <klawiatura+0xba>
+ 4ce:	8e 30       	cpi	r24, 0x0E	; 14
+ 4d0:	09 f0       	breq	.+2      	; 0x4d4 <klawiatura+0x52>
+ 4d2:	20 c1       	rjmp	.+576    	; 0x714 <klawiatura+0x292>
 		   case 0b00001111: 
 		        break;
 		   case 0b00001110: // up
 		   		if (i==7) {
- 4be:	c7 30       	cpi	r28, 0x07	; 7
- 4c0:	01 f5       	brne	.+64     	; 0x502 <klawiatura+0x92>
+ 4d4:	c7 30       	cpi	r28, 0x07	; 7
+ 4d6:	01 f5       	brne	.+64     	; 0x518 <klawiatura+0x96>
 					if(liniaMenu!=1 && idMenu==0){
- 4c2:	90 91 ad 00 	lds	r25, 0x00AD
- 4c6:	91 30       	cpi	r25, 0x01	; 1
- 4c8:	31 f0       	breq	.+12     	; 0x4d6 <klawiatura+0x66>
- 4ca:	80 91 b1 00 	lds	r24, 0x00B1
- 4ce:	88 23       	and	r24, r24
- 4d0:	11 f4       	brne	.+4      	; 0x4d6 <klawiatura+0x66>
+ 4d8:	90 91 c6 00 	lds	r25, 0x00C6
+ 4dc:	91 30       	cpi	r25, 0x01	; 1
+ 4de:	31 f0       	breq	.+12     	; 0x4ec <klawiatura+0x6a>
+ 4e0:	80 91 c9 00 	lds	r24, 0x00C9
+ 4e4:	88 23       	and	r24, r24
+ 4e6:	11 f4       	brne	.+4      	; 0x4ec <klawiatura+0x6a>
 		            	liniaMenu--;
- 4d2:	91 50       	subi	r25, 0x01	; 1
- 4d4:	33 c0       	rjmp	.+102    	; 0x53c <klawiatura+0xcc>
+ 4e8:	91 50       	subi	r25, 0x01	; 1
+ 4ea:	33 c0       	rjmp	.+102    	; 0x552 <klawiatura+0xd0>
 						menu();
 					} else if(idMenu==1 && menuProgram==2 && liniaMenu!=1){
- 4d6:	80 91 b1 00 	lds	r24, 0x00B1
- 4da:	81 30       	cpi	r24, 0x01	; 1
- 4dc:	09 f0       	breq	.+2      	; 0x4e0 <klawiatura+0x70>
- 4de:	d6 c0       	rjmp	.+428    	; 0x68c <klawiatura+0x21c>
- 4e0:	80 91 ae 00 	lds	r24, 0x00AE
- 4e4:	82 30       	cpi	r24, 0x02	; 2
- 4e6:	29 f4       	brne	.+10     	; 0x4f2 <klawiatura+0x82>
- 4e8:	91 30       	cpi	r25, 0x01	; 1
- 4ea:	09 f4       	brne	.+2      	; 0x4ee <klawiatura+0x7e>
- 4ec:	cf c0       	rjmp	.+414    	; 0x68c <klawiatura+0x21c>
+ 4ec:	80 91 c9 00 	lds	r24, 0x00C9
+ 4f0:	81 30       	cpi	r24, 0x01	; 1
+ 4f2:	09 f0       	breq	.+2      	; 0x4f6 <klawiatura+0x74>
+ 4f4:	0f c1       	rjmp	.+542    	; 0x714 <klawiatura+0x292>
+ 4f6:	80 91 c7 00 	lds	r24, 0x00C7
+ 4fa:	82 30       	cpi	r24, 0x02	; 2
+ 4fc:	29 f4       	brne	.+10     	; 0x508 <klawiatura+0x86>
+ 4fe:	91 30       	cpi	r25, 0x01	; 1
+ 500:	09 f4       	brne	.+2      	; 0x504 <klawiatura+0x82>
+ 502:	08 c1       	rjmp	.+528    	; 0x714 <klawiatura+0x292>
 						liniaMenu--;
- 4ee:	91 50       	subi	r25, 0x01	; 1
- 4f0:	37 c0       	rjmp	.+110    	; 0x560 <klawiatura+0xf0>
+ 504:	91 50       	subi	r25, 0x01	; 1
+ 506:	37 c0       	rjmp	.+110    	; 0x576 <klawiatura+0xf4>
 						menu2();
 					} else if(idMenu==1 && menuProgram==3 && liniaMenu!=1){
- 4f2:	83 30       	cpi	r24, 0x03	; 3
- 4f4:	09 f0       	breq	.+2      	; 0x4f8 <klawiatura+0x88>
- 4f6:	ca c0       	rjmp	.+404    	; 0x68c <klawiatura+0x21c>
- 4f8:	91 30       	cpi	r25, 0x01	; 1
- 4fa:	09 f4       	brne	.+2      	; 0x4fe <klawiatura+0x8e>
- 4fc:	c7 c0       	rjmp	.+398    	; 0x68c <klawiatura+0x21c>
+ 508:	83 30       	cpi	r24, 0x03	; 3
+ 50a:	09 f0       	breq	.+2      	; 0x50e <klawiatura+0x8c>
+ 50c:	03 c1       	rjmp	.+518    	; 0x714 <klawiatura+0x292>
+ 50e:	91 30       	cpi	r25, 0x01	; 1
+ 510:	09 f4       	brne	.+2      	; 0x514 <klawiatura+0x92>
+ 512:	00 c1       	rjmp	.+512    	; 0x714 <klawiatura+0x292>
 						liniaMenu--;
- 4fe:	91 50       	subi	r25, 0x01	; 1
- 500:	3b c0       	rjmp	.+118    	; 0x578 <klawiatura+0x108>
+ 514:	91 50       	subi	r25, 0x01	; 1
+ 516:	3b c0       	rjmp	.+118    	; 0x58e <klawiatura+0x10c>
 						menu3();	
 					}
-				} else if (i==4 && wykryjPrzycisk==1){
- 502:	c4 30       	cpi	r28, 0x04	; 4
- 504:	09 f0       	breq	.+2      	; 0x508 <klawiatura+0x98>
- 506:	c2 c0       	rjmp	.+388    	; 0x68c <klawiatura+0x21c>
- 508:	80 91 b4 00 	lds	r24, 0x00B4
- 50c:	81 30       	cpi	r24, 0x01	; 1
- 50e:	09 f0       	breq	.+2      	; 0x512 <klawiatura+0xa2>
- 510:	bd c0       	rjmp	.+378    	; 0x68c <klawiatura+0x21c>
+				} else if (i==4 && wykryjPrzycisk==1){ // przycisk 1
+ 518:	c4 30       	cpi	r28, 0x04	; 4
+ 51a:	09 f0       	breq	.+2      	; 0x51e <klawiatura+0x9c>
+ 51c:	fb c0       	rjmp	.+502    	; 0x714 <klawiatura+0x292>
+ 51e:	80 91 cc 00 	lds	r24, 0x00CC
+ 522:	81 30       	cpi	r24, 0x01	; 1
+ 524:	09 f0       	breq	.+2      	; 0x528 <klawiatura+0xa6>
+ 526:	f6 c0       	rjmp	.+492    	; 0x714 <klawiatura+0x292>
 					wyjscie=0x01;
 					czyscLCD_y(15);
- 512:	8f e0       	ldi	r24, 0x0F	; 15
- 514:	0e 94 e7 00 	call	0x1ce	; 0x1ce <czyscLCD_y>
+ 528:	8f e0       	ldi	r24, 0x0F	; 15
+ 52a:	0e 94 e7 00 	call	0x1ce	; 0x1ce <czyscLCD_y>
 					ustawKursor(0,15);
- 518:	80 e0       	ldi	r24, 0x00	; 0
- 51a:	6f e0       	ldi	r22, 0x0F	; 15
- 51c:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 52e:	80 e0       	ldi	r24, 0x00	; 0
+ 530:	6f e0       	ldi	r22, 0x0F	; 15
+ 532:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 					napisz("1",1);
- 520:	87 ea       	ldi	r24, 0xA7	; 167
- 522:	90 e0       	ldi	r25, 0x00	; 0
- 524:	72 c0       	rjmp	.+228    	; 0x60a <klawiatura+0x19a>
+ 536:	87 ea       	ldi	r24, 0xA7	; 167
+ 538:	90 e0       	ldi	r25, 0x00	; 0
+ 53a:	75 c0       	rjmp	.+234    	; 0x626 <klawiatura+0x1a4>
 				} 
 		        break;
 		   case 0b00001101: // down
 		   		if (i==7) {
- 526:	c7 30       	cpi	r28, 0x07	; 7
- 528:	61 f5       	brne	.+88     	; 0x582 <klawiatura+0x112>
+ 53c:	c7 30       	cpi	r28, 0x07	; 7
+ 53e:	61 f5       	brne	.+88     	; 0x598 <klawiatura+0x116>
 					if(liniaMenu!=3 && idMenu==0){
- 52a:	90 91 ad 00 	lds	r25, 0x00AD
- 52e:	93 30       	cpi	r25, 0x03	; 3
- 530:	51 f0       	breq	.+20     	; 0x546 <klawiatura+0xd6>
- 532:	80 91 b1 00 	lds	r24, 0x00B1
- 536:	88 23       	and	r24, r24
- 538:	31 f4       	brne	.+12     	; 0x546 <klawiatura+0xd6>
+ 540:	90 91 c6 00 	lds	r25, 0x00C6
+ 544:	93 30       	cpi	r25, 0x03	; 3
+ 546:	51 f0       	breq	.+20     	; 0x55c <klawiatura+0xda>
+ 548:	80 91 c9 00 	lds	r24, 0x00C9
+ 54c:	88 23       	and	r24, r24
+ 54e:	31 f4       	brne	.+12     	; 0x55c <klawiatura+0xda>
 		            	liniaMenu++;
- 53a:	9f 5f       	subi	r25, 0xFF	; 255
- 53c:	90 93 ad 00 	sts	0x00AD, r25
+ 550:	9f 5f       	subi	r25, 0xFF	; 255
+ 552:	90 93 c6 00 	sts	0x00C6, r25
 						menu();
- 540:	0e 94 9e 01 	call	0x33c	; 0x33c <menu>
- 544:	a3 c0       	rjmp	.+326    	; 0x68c <klawiatura+0x21c>
+ 556:	0e 94 a6 01 	call	0x34c	; 0x34c <menu>
+ 55a:	dc c0       	rjmp	.+440    	; 0x714 <klawiatura+0x292>
 					} else if(idMenu==1 && menuProgram==2 && liniaMenu!=2){
- 546:	80 91 b1 00 	lds	r24, 0x00B1
- 54a:	81 30       	cpi	r24, 0x01	; 1
- 54c:	09 f0       	breq	.+2      	; 0x550 <klawiatura+0xe0>
- 54e:	9e c0       	rjmp	.+316    	; 0x68c <klawiatura+0x21c>
- 550:	80 91 ae 00 	lds	r24, 0x00AE
- 554:	82 30       	cpi	r24, 0x02	; 2
- 556:	49 f4       	brne	.+18     	; 0x56a <klawiatura+0xfa>
- 558:	92 30       	cpi	r25, 0x02	; 2
- 55a:	09 f4       	brne	.+2      	; 0x55e <klawiatura+0xee>
- 55c:	97 c0       	rjmp	.+302    	; 0x68c <klawiatura+0x21c>
+ 55c:	80 91 c9 00 	lds	r24, 0x00C9
+ 560:	81 30       	cpi	r24, 0x01	; 1
+ 562:	09 f0       	breq	.+2      	; 0x566 <klawiatura+0xe4>
+ 564:	d7 c0       	rjmp	.+430    	; 0x714 <klawiatura+0x292>
+ 566:	80 91 c7 00 	lds	r24, 0x00C7
+ 56a:	82 30       	cpi	r24, 0x02	; 2
+ 56c:	49 f4       	brne	.+18     	; 0x580 <klawiatura+0xfe>
+ 56e:	92 30       	cpi	r25, 0x02	; 2
+ 570:	09 f4       	brne	.+2      	; 0x574 <klawiatura+0xf2>
+ 572:	d0 c0       	rjmp	.+416    	; 0x714 <klawiatura+0x292>
 						liniaMenu++;
- 55e:	9f 5f       	subi	r25, 0xFF	; 255
- 560:	90 93 ad 00 	sts	0x00AD, r25
+ 574:	9f 5f       	subi	r25, 0xFF	; 255
+ 576:	90 93 c6 00 	sts	0x00C6, r25
 						menu2();
- 564:	0e 94 18 01 	call	0x230	; 0x230 <menu2>
- 568:	91 c0       	rjmp	.+290    	; 0x68c <klawiatura+0x21c>
-						
+ 57a:	0e 94 20 01 	call	0x240	; 0x240 <menu2>
+ 57e:	ca c0       	rjmp	.+404    	; 0x714 <klawiatura+0x292>
 					} else if(idMenu==1 && menuProgram==3 && liniaMenu!=2){
- 56a:	83 30       	cpi	r24, 0x03	; 3
- 56c:	09 f0       	breq	.+2      	; 0x570 <klawiatura+0x100>
- 56e:	8e c0       	rjmp	.+284    	; 0x68c <klawiatura+0x21c>
- 570:	92 30       	cpi	r25, 0x02	; 2
- 572:	09 f4       	brne	.+2      	; 0x576 <klawiatura+0x106>
- 574:	8b c0       	rjmp	.+278    	; 0x68c <klawiatura+0x21c>
+ 580:	83 30       	cpi	r24, 0x03	; 3
+ 582:	09 f0       	breq	.+2      	; 0x586 <klawiatura+0x104>
+ 584:	c7 c0       	rjmp	.+398    	; 0x714 <klawiatura+0x292>
+ 586:	92 30       	cpi	r25, 0x02	; 2
+ 588:	09 f4       	brne	.+2      	; 0x58c <klawiatura+0x10a>
+ 58a:	c4 c0       	rjmp	.+392    	; 0x714 <klawiatura+0x292>
 						liniaMenu++;
- 576:	9f 5f       	subi	r25, 0xFF	; 255
- 578:	90 93 ad 00 	sts	0x00AD, r25
+ 58c:	9f 5f       	subi	r25, 0xFF	; 255
+ 58e:	90 93 c6 00 	sts	0x00C6, r25
 						menu3();
- 57c:	0e 94 5b 01 	call	0x2b6	; 0x2b6 <menu3>
- 580:	85 c0       	rjmp	.+266    	; 0x68c <klawiatura+0x21c>
-						
+ 592:	0e 94 63 01 	call	0x2c6	; 0x2c6 <menu3>
+ 596:	be c0       	rjmp	.+380    	; 0x714 <klawiatura+0x292>
 					}
-				} else if (i==4 && wykryjPrzycisk==1){
- 582:	c4 30       	cpi	r28, 0x04	; 4
- 584:	09 f0       	breq	.+2      	; 0x588 <klawiatura+0x118>
- 586:	82 c0       	rjmp	.+260    	; 0x68c <klawiatura+0x21c>
- 588:	80 91 b4 00 	lds	r24, 0x00B4
- 58c:	81 30       	cpi	r24, 0x01	; 1
- 58e:	09 f0       	breq	.+2      	; 0x592 <klawiatura+0x122>
- 590:	7d c0       	rjmp	.+250    	; 0x68c <klawiatura+0x21c>
+				} else if (i==4 && wykryjPrzycisk==1){ // przycisk 4
+ 598:	c4 30       	cpi	r28, 0x04	; 4
+ 59a:	09 f0       	breq	.+2      	; 0x59e <klawiatura+0x11c>
+ 59c:	bb c0       	rjmp	.+374    	; 0x714 <klawiatura+0x292>
+ 59e:	80 91 cc 00 	lds	r24, 0x00CC
+ 5a2:	81 30       	cpi	r24, 0x01	; 1
+ 5a4:	09 f0       	breq	.+2      	; 0x5a8 <klawiatura+0x126>
+ 5a6:	b6 c0       	rjmp	.+364    	; 0x714 <klawiatura+0x292>
 					wyjscie=0x02;
 					czyscLCD_y(15);
- 592:	8f e0       	ldi	r24, 0x0F	; 15
- 594:	0e 94 e7 00 	call	0x1ce	; 0x1ce <czyscLCD_y>
+ 5a8:	8f e0       	ldi	r24, 0x0F	; 15
+ 5aa:	0e 94 e7 00 	call	0x1ce	; 0x1ce <czyscLCD_y>
 					ustawKursor(0,15);
- 598:	80 e0       	ldi	r24, 0x00	; 0
- 59a:	6f e0       	ldi	r22, 0x0F	; 15
- 59c:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 5ae:	80 e0       	ldi	r24, 0x00	; 0
+ 5b0:	6f e0       	ldi	r22, 0x0F	; 15
+ 5b2:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 					napisz("4",1);
- 5a0:	89 ea       	ldi	r24, 0xA9	; 169
- 5a2:	90 e0       	ldi	r25, 0x00	; 0
- 5a4:	32 c0       	rjmp	.+100    	; 0x60a <klawiatura+0x19a>
-				}
+ 5b6:	89 ea       	ldi	r24, 0xA9	; 169
+ 5b8:	90 e0       	ldi	r25, 0x00	; 0
+ 5ba:	35 c0       	rjmp	.+106    	; 0x626 <klawiatura+0x1a4>
+					PORTC=0x00;
+				} 
+				*/
 		        break;
 		   case 0b00001011: // clear(escape) 
 				if (i==7) {
- 5a6:	c7 30       	cpi	r28, 0x07	; 7
- 5a8:	f9 f4       	brne	.+62     	; 0x5e8 <klawiatura+0x178>
+ 5bc:	c7 30       	cpi	r28, 0x07	; 7
+ 5be:	11 f5       	brne	.+68     	; 0x604 <klawiatura+0x182>
 					wykryjPrzycisk=0;
- 5aa:	10 92 b4 00 	sts	0x00B4, r1
+ 5c0:	10 92 cc 00 	sts	0x00CC, r1
 					progTrwa=0;
- 5ae:	10 92 b3 00 	sts	0x00B3, r1
-					//menuPom=0;
+ 5c4:	10 92 cb 00 	sts	0x00CB, r1
+					PORTC=0x00;
+ 5c8:	15 ba       	out	0x15, r1	; 21
+					if(progTrwa==0)
+						czyscLCD();
+ 5ca:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
 					if(menuProgram==2){
- 5b2:	90 91 ae 00 	lds	r25, 0x00AE
- 5b6:	92 30       	cpi	r25, 0x02	; 2
- 5b8:	11 f0       	breq	.+4      	; 0x5be <klawiatura+0x14e>
+ 5ce:	90 91 c7 00 	lds	r25, 0x00C7
+ 5d2:	92 30       	cpi	r25, 0x02	; 2
+ 5d4:	11 f0       	breq	.+4      	; 0x5da <klawiatura+0x158>
 						menuProgram=1;
 						liniaMenu=2;
 					} else if(menuProgram==3){
- 5ba:	93 30       	cpi	r25, 0x03	; 3
- 5bc:	29 f4       	brne	.+10     	; 0x5c8 <klawiatura+0x158>
+ 5d6:	93 30       	cpi	r25, 0x03	; 3
+ 5d8:	29 f4       	brne	.+10     	; 0x5e4 <klawiatura+0x162>
 						menuProgram=1;
- 5be:	81 e0       	ldi	r24, 0x01	; 1
- 5c0:	80 93 ae 00 	sts	0x00AE, r24
+ 5da:	81 e0       	ldi	r24, 0x01	; 1
+ 5dc:	80 93 c7 00 	sts	0x00C7, r24
 						liniaMenu=3;
- 5c4:	90 93 ad 00 	sts	0x00AD, r25
+ 5e0:	90 93 c6 00 	sts	0x00C6, r25
 					}						
 					if(idMenu!=0)
- 5c8:	80 91 b1 00 	lds	r24, 0x00B1
- 5cc:	88 23       	and	r24, r24
- 5ce:	19 f0       	breq	.+6      	; 0x5d6 <klawiatura+0x166>
+ 5e4:	80 91 c9 00 	lds	r24, 0x00C9
+ 5e8:	88 23       	and	r24, r24
+ 5ea:	19 f0       	breq	.+6      	; 0x5f2 <klawiatura+0x170>
 			   			idMenu--;
- 5d0:	81 50       	subi	r24, 0x01	; 1
- 5d2:	80 93 b1 00 	sts	0x00B1, r24
+ 5ec:	81 50       	subi	r24, 0x01	; 1
+ 5ee:	80 93 c9 00 	sts	0x00C9, r24
 					if (menuProgram==1)
- 5d6:	80 91 ae 00 	lds	r24, 0x00AE
- 5da:	81 30       	cpi	r24, 0x01	; 1
- 5dc:	09 f4       	brne	.+2      	; 0x5e0 <klawiatura+0x170>
- 5de:	b0 cf       	rjmp	.-160    	; 0x540 <klawiatura+0xd0>
+ 5f2:	80 91 c7 00 	lds	r24, 0x00C7
+ 5f6:	81 30       	cpi	r24, 0x01	; 1
+ 5f8:	09 f4       	brne	.+2      	; 0x5fc <klawiatura+0x17a>
+ 5fa:	ad cf       	rjmp	.-166    	; 0x556 <klawiatura+0xd4>
 						menu();
 					else if (menuProgram==2)
- 5e0:	82 30       	cpi	r24, 0x02	; 2
- 5e2:	09 f0       	breq	.+2      	; 0x5e6 <klawiatura+0x176>
- 5e4:	53 c0       	rjmp	.+166    	; 0x68c <klawiatura+0x21c>
- 5e6:	be cf       	rjmp	.-132    	; 0x564 <klawiatura+0xf4>
+ 5fc:	82 30       	cpi	r24, 0x02	; 2
+ 5fe:	09 f0       	breq	.+2      	; 0x602 <klawiatura+0x180>
+ 600:	89 c0       	rjmp	.+274    	; 0x714 <klawiatura+0x292>
+ 602:	bb cf       	rjmp	.-138    	; 0x57a <klawiatura+0xf8>
 						menu2();
-				} else if (i==4 && wykryjPrzycisk==1){
- 5e8:	c4 30       	cpi	r28, 0x04	; 4
- 5ea:	09 f0       	breq	.+2      	; 0x5ee <klawiatura+0x17e>
- 5ec:	4f c0       	rjmp	.+158    	; 0x68c <klawiatura+0x21c>
- 5ee:	80 91 b4 00 	lds	r24, 0x00B4
- 5f2:	81 30       	cpi	r24, 0x01	; 1
- 5f4:	09 f0       	breq	.+2      	; 0x5f8 <klawiatura+0x188>
- 5f6:	4a c0       	rjmp	.+148    	; 0x68c <klawiatura+0x21c>
+				} else if (i==4 && wykryjPrzycisk==1){ // przycisk 7
+ 604:	c4 30       	cpi	r28, 0x04	; 4
+ 606:	09 f0       	breq	.+2      	; 0x60a <klawiatura+0x188>
+ 608:	85 c0       	rjmp	.+266    	; 0x714 <klawiatura+0x292>
+ 60a:	80 91 cc 00 	lds	r24, 0x00CC
+ 60e:	81 30       	cpi	r24, 0x01	; 1
+ 610:	09 f0       	breq	.+2      	; 0x614 <klawiatura+0x192>
+ 612:	80 c0       	rjmp	.+256    	; 0x714 <klawiatura+0x292>
 					wyjscie=0x04;
 					czyscLCD_y(15);
- 5f8:	8f e0       	ldi	r24, 0x0F	; 15
- 5fa:	0e 94 e7 00 	call	0x1ce	; 0x1ce <czyscLCD_y>
+ 614:	8f e0       	ldi	r24, 0x0F	; 15
+ 616:	0e 94 e7 00 	call	0x1ce	; 0x1ce <czyscLCD_y>
 					ustawKursor(0,15);
- 5fe:	80 e0       	ldi	r24, 0x00	; 0
- 600:	6f e0       	ldi	r22, 0x0F	; 15
- 602:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+ 61a:	80 e0       	ldi	r24, 0x00	; 0
+ 61c:	6f e0       	ldi	r22, 0x0F	; 15
+ 61e:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
 					napisz("7",1);
- 606:	8b ea       	ldi	r24, 0xAB	; 171
- 608:	90 e0       	ldi	r25, 0x00	; 0
- 60a:	61 e0       	ldi	r22, 0x01	; 1
- 60c:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
- 610:	3d c0       	rjmp	.+122    	; 0x68c <klawiatura+0x21c>
+ 622:	8b ea       	ldi	r24, 0xAB	; 171
+ 624:	90 e0       	ldi	r25, 0x00	; 0
+ 626:	61 e0       	ldi	r22, 0x01	; 1
+ 628:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 62c:	73 c0       	rjmp	.+230    	; 0x714 <klawiatura+0x292>
 				}
 		        break;
 		   case 0b00000111: // enter
 		   		if (i==7) {
- 612:	c7 30       	cpi	r28, 0x07	; 7
- 614:	d9 f5       	brne	.+118    	; 0x68c <klawiatura+0x21c>
+ 62e:	c7 30       	cpi	r28, 0x07	; 7
+ 630:	09 f0       	breq	.+2      	; 0x634 <klawiatura+0x1b2>
+ 632:	70 c0       	rjmp	.+224    	; 0x714 <klawiatura+0x292>
 					if (idMenu!=2){
- 616:	80 91 b1 00 	lds	r24, 0x00B1
- 61a:	82 30       	cpi	r24, 0x02	; 2
- 61c:	19 f0       	breq	.+6      	; 0x624 <klawiatura+0x1b4>
+ 634:	80 91 c9 00 	lds	r24, 0x00C9
+ 638:	82 30       	cpi	r24, 0x02	; 2
+ 63a:	19 f0       	breq	.+6      	; 0x642 <klawiatura+0x1c0>
 			   			idMenu++;
- 61e:	8f 5f       	subi	r24, 0xFF	; 255
- 620:	80 93 b1 00 	sts	0x00B1, r24
+ 63c:	8f 5f       	subi	r24, 0xFF	; 255
+ 63e:	80 93 c9 00 	sts	0x00C9, r24
 					}
 					if (menuProgram==1)
- 624:	80 91 ae 00 	lds	r24, 0x00AE
- 628:	81 30       	cpi	r24, 0x01	; 1
- 62a:	19 f4       	brne	.+6      	; 0x632 <klawiatura+0x1c2>
+ 642:	80 91 c7 00 	lds	r24, 0x00C7
+ 646:	81 30       	cpi	r24, 0x01	; 1
+ 648:	19 f4       	brne	.+6      	; 0x650 <klawiatura+0x1ce>
 						menu();
- 62c:	0e 94 9e 01 	call	0x33c	; 0x33c <menu>
- 630:	09 c0       	rjmp	.+18     	; 0x644 <klawiatura+0x1d4>
+ 64a:	0e 94 a6 01 	call	0x34c	; 0x34c <menu>
+ 64e:	09 c0       	rjmp	.+18     	; 0x662 <klawiatura+0x1e0>
 					else if (menuProgram==2)
- 632:	82 30       	cpi	r24, 0x02	; 2
- 634:	19 f4       	brne	.+6      	; 0x63c <klawiatura+0x1cc>
-						menu2();
- 636:	0e 94 18 01 	call	0x230	; 0x230 <menu2>
- 63a:	04 c0       	rjmp	.+8      	; 0x644 <klawiatura+0x1d4>
-					else if (menuProgram==3)
- 63c:	83 30       	cpi	r24, 0x03	; 3
- 63e:	11 f4       	brne	.+4      	; 0x644 <klawiatura+0x1d4>
-						menu3();
- 640:	0e 94 5b 01 	call	0x2b6	; 0x2b6 <menu3>
-					if (menuProgram==3 && idMenu==2 && liniaMenu==1){
- 644:	80 91 ae 00 	lds	r24, 0x00AE
- 648:	83 30       	cpi	r24, 0x03	; 3
- 64a:	71 f4       	brne	.+28     	; 0x668 <klawiatura+0x1f8>
- 64c:	80 91 b1 00 	lds	r24, 0x00B1
  650:	82 30       	cpi	r24, 0x02	; 2
- 652:	51 f4       	brne	.+20     	; 0x668 <klawiatura+0x1f8>
- 654:	10 91 ad 00 	lds	r17, 0x00AD
- 658:	11 30       	cpi	r17, 0x01	; 1
- 65a:	31 f4       	brne	.+12     	; 0x668 <klawiatura+0x1f8>
+ 652:	19 f4       	brne	.+6      	; 0x65a <klawiatura+0x1d8>
+						menu2();
+ 654:	0e 94 20 01 	call	0x240	; 0x240 <menu2>
+ 658:	04 c0       	rjmp	.+8      	; 0x662 <klawiatura+0x1e0>
+					else if (menuProgram==3)
+ 65a:	83 30       	cpi	r24, 0x03	; 3
+ 65c:	11 f4       	brne	.+4      	; 0x662 <klawiatura+0x1e0>
+						menu3();
+ 65e:	0e 94 63 01 	call	0x2c6	; 0x2c6 <menu3>
+					if (menuProgram==1 && idMenu==2 && liniaMenu==1){
+ 662:	80 91 c7 00 	lds	r24, 0x00C7
+ 666:	81 30       	cpi	r24, 0x01	; 1
+ 668:	99 f4       	brne	.+38     	; 0x690 <klawiatura+0x20e>
+ 66a:	80 91 c9 00 	lds	r24, 0x00C9
+ 66e:	82 30       	cpi	r24, 0x02	; 2
+ 670:	79 f4       	brne	.+30     	; 0x690 <klawiatura+0x20e>
+ 672:	10 91 c6 00 	lds	r17, 0x00C6
+ 676:	11 30       	cpi	r17, 0x01	; 1
+ 678:	59 f4       	brne	.+22     	; 0x690 <klawiatura+0x20e>
+						//przyciski
+						czyscLCD();
+ 67a:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+						napisz("Przycisk nr: ", 13);
+ 67e:	8d ea       	ldi	r24, 0xAD	; 173
+ 680:	90 e0       	ldi	r25, 0x00	; 0
+ 682:	6d e0       	ldi	r22, 0x0D	; 13
+ 684:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+						progTrwa=1;
+ 688:	10 93 cb 00 	sts	0x00CB, r17
+						wykryjPrzycisk=1;
+ 68c:	10 93 cc 00 	sts	0x00CC, r17
+					}
+					if (menuProgram==2 && idMenu==2 && liniaMenu==1){
+ 690:	80 91 c7 00 	lds	r24, 0x00C7
+ 694:	82 30       	cpi	r24, 0x02	; 2
+ 696:	d1 f4       	brne	.+52     	; 0x6cc <klawiatura+0x24a>
+ 698:	90 91 c9 00 	lds	r25, 0x00C9
+ 69c:	92 30       	cpi	r25, 0x02	; 2
+ 69e:	b1 f4       	brne	.+44     	; 0x6cc <klawiatura+0x24a>
+ 6a0:	80 91 c6 00 	lds	r24, 0x00C6
+ 6a4:	81 30       	cpi	r24, 0x01	; 1
+ 6a6:	e1 f5       	brne	.+120    	; 0x720 <klawiatura+0x29e>
+						//timer
+						progTrwa=2;
+ 6a8:	90 93 cb 00 	sts	0x00CB, r25
+						time=0;
+ 6ac:	10 92 cd 00 	sts	0x00CD, r1
+						PORTC=0x00;
+ 6b0:	15 ba       	out	0x15, r1	; 21
+ 6b2:	36 c0       	rjmp	.+108    	; 0x720 <klawiatura+0x29e>
+					if (menuProgram==2 && idMenu==2 && liniaMenu==2){
+						//stoper
+						/* ustaw zmienn¹, ¿eby zezwoliæ na obs³ugê 5 i 6
+						wykryjPrzycisk=2; 
+						*/
+						progTrwa=3;
+ 6b4:	00 93 cb 00 	sts	0x00CB, r16
+						time=0;
+ 6b8:	10 92 cd 00 	sts	0x00CD, r1
+						PORTC=0x00;
+ 6bc:	15 ba       	out	0x15, r1	; 21
+						czyscLCD();
+ 6be:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+						napisz("CZAS:", 5);
+ 6c2:	8b eb       	ldi	r24, 0xBB	; 187
+ 6c4:	90 e0       	ldi	r25, 0x00	; 0
+ 6c6:	65 e0       	ldi	r22, 0x05	; 5
+ 6c8:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+					}
+					if (menuProgram==3 && idMenu==2 && liniaMenu==1){
+ 6cc:	80 91 c7 00 	lds	r24, 0x00C7
+ 6d0:	83 30       	cpi	r24, 0x03	; 3
+ 6d2:	71 f4       	brne	.+28     	; 0x6f0 <klawiatura+0x26e>
+ 6d4:	80 91 c9 00 	lds	r24, 0x00C9
+ 6d8:	82 30       	cpi	r24, 0x02	; 2
+ 6da:	51 f4       	brne	.+20     	; 0x6f0 <klawiatura+0x26e>
+ 6dc:	10 91 c6 00 	lds	r17, 0x00C6
+ 6e0:	11 30       	cpi	r17, 0x01	; 1
+ 6e2:	31 f4       	brne	.+12     	; 0x6f0 <klawiatura+0x26e>
+						//przejscie do menu1
 						menuProgram=1;
- 65c:	10 93 ae 00 	sts	0x00AE, r17
+ 6e4:	10 93 c7 00 	sts	0x00C7, r17
 						menu1();
- 660:	0e 94 07 01 	call	0x20e	; 0x20e <menu1>
+ 6e8:	0e 94 0f 01 	call	0x21e	; 0x21e <menu1>
 						idMenu=1;	
- 664:	10 93 b1 00 	sts	0x00B1, r17
+ 6ec:	10 93 c9 00 	sts	0x00C9, r17
 					}
 					if (menuProgram==3 && idMenu==2 && liniaMenu==2){
- 668:	80 91 ae 00 	lds	r24, 0x00AE
- 66c:	83 30       	cpi	r24, 0x03	; 3
- 66e:	71 f4       	brne	.+28     	; 0x68c <klawiatura+0x21c>
- 670:	80 91 b1 00 	lds	r24, 0x00B1
- 674:	82 30       	cpi	r24, 0x02	; 2
- 676:	51 f4       	brne	.+20     	; 0x68c <klawiatura+0x21c>
- 678:	80 91 ad 00 	lds	r24, 0x00AD
- 67c:	82 30       	cpi	r24, 0x02	; 2
- 67e:	31 f4       	brne	.+12     	; 0x68c <klawiatura+0x21c>
+ 6f0:	80 91 c7 00 	lds	r24, 0x00C7
+ 6f4:	83 30       	cpi	r24, 0x03	; 3
+ 6f6:	71 f4       	brne	.+28     	; 0x714 <klawiatura+0x292>
+ 6f8:	80 91 c9 00 	lds	r24, 0x00C9
+ 6fc:	82 30       	cpi	r24, 0x02	; 2
+ 6fe:	51 f4       	brne	.+20     	; 0x714 <klawiatura+0x292>
+ 700:	80 91 c6 00 	lds	r24, 0x00C6
+ 704:	82 30       	cpi	r24, 0x02	; 2
+ 706:	31 f4       	brne	.+12     	; 0x714 <klawiatura+0x292>
+						//diody
 						idMenu=1;
- 680:	81 e0       	ldi	r24, 0x01	; 1
- 682:	80 93 b1 00 	sts	0x00B1, r24
+ 708:	81 e0       	ldi	r24, 0x01	; 1
+ 70a:	80 93 c9 00 	sts	0x00C9, r24
 						diody();
- 686:	0e 94 16 02 	call	0x42c	; 0x42c <diody>
+ 70e:	0e 94 1f 02 	call	0x43e	; 0x43e <diody>
 						PORTC=0x00;	
- 68a:	15 ba       	out	0x15, r1	; 21
- 68c:	21 96       	adiw	r28, 0x01	; 1
-ISR(TIMER2_COMP_vect) { // przerwanie timer2
+ 712:	15 ba       	out	0x15, r1	; 21
+ 714:	21 96       	adiw	r28, 0x01	; 1
+		PORTC++;
+	}
 }
-*/
 void klawiatura(){
 	uint8_t i,wyjscie = 0x00;
 	for (i=4 ; i<8 ; i++){
- 68e:	c8 30       	cpi	r28, 0x08	; 8
- 690:	d1 05       	cpc	r29, r1
- 692:	09 f0       	breq	.+2      	; 0x696 <klawiatura+0x226>
- 694:	f7 ce       	rjmp	.-530    	; 0x484 <klawiatura+0x14>
+ 716:	c8 30       	cpi	r28, 0x08	; 8
+ 718:	d1 05       	cpc	r29, r1
+ 71a:	09 f0       	breq	.+2      	; 0x71e <klawiatura+0x29c>
+ 71c:	be ce       	rjmp	.-644    	; 0x49a <klawiatura+0x18>
+ 71e:	05 c0       	rjmp	.+10     	; 0x72a <klawiatura+0x2a8>
+						//timer
+						progTrwa=2;
+						time=0;
+						PORTC=0x00;
+					}
+					if (menuProgram==2 && idMenu==2 && liniaMenu==2){
+ 720:	80 91 c6 00 	lds	r24, 0x00C6
+ 724:	82 30       	cpi	r24, 0x02	; 2
+ 726:	91 f6       	brne	.-92     	; 0x6cc <klawiatura+0x24a>
+ 728:	c5 cf       	rjmp	.-118    	; 0x6b4 <klawiatura+0x232>
+		        break;
 		   default:
 		        break;	
 		};	
-		//PORTC = liniaMenu;
 	}
 }
- 696:	df 91       	pop	r29
- 698:	cf 91       	pop	r28
- 69a:	1f 91       	pop	r17
- 69c:	ff 90       	pop	r15
- 69e:	ef 90       	pop	r14
- 6a0:	08 95       	ret
+ 72a:	df 91       	pop	r29
+ 72c:	cf 91       	pop	r28
+ 72e:	1f 91       	pop	r17
+ 730:	0f 91       	pop	r16
+ 732:	ff 90       	pop	r15
+ 734:	ef 90       	pop	r14
+ 736:	08 95       	ret
 
-000006a2 <__vector_10>:
+00000738 <__vector_10>:
 		wypisz(0x14,LCD_COMMAND);
 	while(y++ <= 16)
 		wypisz(' ',LCD_DATA);
 }
  
 ISR(TIMER0_COMP_vect) { // przerwanie timer0
- 6a2:	1f 92       	push	r1
- 6a4:	0f 92       	push	r0
- 6a6:	0f b6       	in	r0, 0x3f	; 63
- 6a8:	0f 92       	push	r0
- 6aa:	11 24       	eor	r1, r1
- 6ac:	2f 93       	push	r18
- 6ae:	3f 93       	push	r19
- 6b0:	4f 93       	push	r20
- 6b2:	5f 93       	push	r21
- 6b4:	6f 93       	push	r22
- 6b6:	7f 93       	push	r23
- 6b8:	8f 93       	push	r24
- 6ba:	9f 93       	push	r25
- 6bc:	af 93       	push	r26
- 6be:	bf 93       	push	r27
- 6c0:	ef 93       	push	r30
- 6c2:	ff 93       	push	r31
+ 738:	1f 92       	push	r1
+ 73a:	0f 92       	push	r0
+ 73c:	0f b6       	in	r0, 0x3f	; 63
+ 73e:	0f 92       	push	r0
+ 740:	11 24       	eor	r1, r1
+ 742:	2f 93       	push	r18
+ 744:	3f 93       	push	r19
+ 746:	4f 93       	push	r20
+ 748:	5f 93       	push	r21
+ 74a:	6f 93       	push	r22
+ 74c:	7f 93       	push	r23
+ 74e:	8f 93       	push	r24
+ 750:	9f 93       	push	r25
+ 752:	af 93       	push	r26
+ 754:	bf 93       	push	r27
+ 756:	ef 93       	push	r30
+ 758:	ff 93       	push	r31
 	klawiatura();   
- 6c4:	0e 94 38 02 	call	0x470	; 0x470 <klawiatura>
+ 75a:	0e 94 41 02 	call	0x482	; 0x482 <klawiatura>
 }
- 6c8:	ff 91       	pop	r31
- 6ca:	ef 91       	pop	r30
- 6cc:	bf 91       	pop	r27
- 6ce:	af 91       	pop	r26
- 6d0:	9f 91       	pop	r25
- 6d2:	8f 91       	pop	r24
- 6d4:	7f 91       	pop	r23
- 6d6:	6f 91       	pop	r22
- 6d8:	5f 91       	pop	r21
- 6da:	4f 91       	pop	r20
- 6dc:	3f 91       	pop	r19
- 6de:	2f 91       	pop	r18
- 6e0:	0f 90       	pop	r0
- 6e2:	0f be       	out	0x3f, r0	; 63
- 6e4:	0f 90       	pop	r0
- 6e6:	1f 90       	pop	r1
- 6e8:	18 95       	reti
+ 75e:	ff 91       	pop	r31
+ 760:	ef 91       	pop	r30
+ 762:	bf 91       	pop	r27
+ 764:	af 91       	pop	r26
+ 766:	9f 91       	pop	r25
+ 768:	8f 91       	pop	r24
+ 76a:	7f 91       	pop	r23
+ 76c:	6f 91       	pop	r22
+ 76e:	5f 91       	pop	r21
+ 770:	4f 91       	pop	r20
+ 772:	3f 91       	pop	r19
+ 774:	2f 91       	pop	r18
+ 776:	0f 90       	pop	r0
+ 778:	0f be       	out	0x3f, r0	; 63
+ 77a:	0f 90       	pop	r0
+ 77c:	1f 90       	pop	r1
+ 77e:	18 95       	reti
 
-000006ea <main>:
+00000780 <main>:
     }
 }
 
 int main(void)
 {
 	DDRA = 0xF0; // ustawienie czêœci portu A w stan wejœcia
- 6ea:	80 ef       	ldi	r24, 0xF0	; 240
- 6ec:	8a bb       	out	0x1a, r24	; 26
+ 780:	80 ef       	ldi	r24, 0xF0	; 240
+ 782:	8a bb       	out	0x1a, r24	; 26
     PORTA = 0x0F; // podci¹gniêcie portu A
- 6ee:	8f e0       	ldi	r24, 0x0F	; 15
- 6f0:	8b bb       	out	0x1b, r24	; 27
+ 784:	8f e0       	ldi	r24, 0x0F	; 15
+ 786:	8b bb       	out	0x1b, r24	; 27
     DDRC = 0xFF; // ustawienie 5 bitów portu C w stan wyjœcia
- 6f2:	8f ef       	ldi	r24, 0xFF	; 255
- 6f4:	84 bb       	out	0x14, r24	; 20
+ 788:	8f ef       	ldi	r24, 0xFF	; 255
+ 78a:	84 bb       	out	0x14, r24	; 20
     PORTC = 0x00; // stan pocz¹tkowy portu C
- 6f6:	15 ba       	out	0x15, r1	; 21
+ 78c:	15 ba       	out	0x15, r1	; 21
 	// timer0
     TCCR0 |= 1 << WGM01 | 1 << CS00 | 1 << CS02; // tryb CTC i preskaler 1024
- 6f8:	83 b7       	in	r24, 0x33	; 51
- 6fa:	8d 60       	ori	r24, 0x0D	; 13
- 6fc:	83 bf       	out	0x33, r24	; 51
+ 78e:	83 b7       	in	r24, 0x33	; 51
+ 790:	8d 60       	ori	r24, 0x0D	; 13
+ 792:	83 bf       	out	0x33, r24	; 51
     TIMSK |= 1 << OCIE0;// | 1<<OCIE2; // flaga przepe³nienia
- 6fe:	89 b7       	in	r24, 0x39	; 57
- 700:	82 60       	ori	r24, 0x02	; 2
- 702:	89 bf       	out	0x39, r24	; 57
-    OCR0 = 10; // czas 5ms 
- 704:	8a e0       	ldi	r24, 0x0A	; 10
- 706:	8c bf       	out	0x3c, r24	; 60
+ 794:	89 b7       	in	r24, 0x39	; 57
+ 796:	82 60       	ori	r24, 0x02	; 2
+ 798:	89 bf       	out	0x39, r24	; 57
+    OCR0 = 10; // czas 10ms 
+ 79a:	8a e0       	ldi	r24, 0x0A	; 10
+ 79c:	8c bf       	out	0x3c, r24	; 60
     TCNT0 = 0; // wartoœæ startowa timera
- 708:	12 be       	out	0x32, r1	; 50
+ 79e:	12 be       	out	0x32, r1	; 50
+	// timer2
 	TIMSK |= 1<<OCIE2;
-	TCCR2 |= 1 << WGM01 | 1 << CS00 | 1 << CS02;
-	OCR2=10;
-	TCNT2=0;
-	*/
+ 7a0:	89 b7       	in	r24, 0x39	; 57
+ 7a2:	80 68       	ori	r24, 0x80	; 128
+ 7a4:	89 bf       	out	0x39, r24	; 57
+	TCCR2 |= 1 << WGM01 | 1 << CS00 | 1 << CS02; // tryb CTC i preskaler 1024
+ 7a6:	85 b5       	in	r24, 0x25	; 37
+ 7a8:	8d 60       	ori	r24, 0x0D	; 13
+ 7aa:	85 bd       	out	0x25, r24	; 37
+	OCR2=250; // czas 250ms
+ 7ac:	8a ef       	ldi	r24, 0xFA	; 250
+ 7ae:	83 bd       	out	0x23, r24	; 35
+	TCNT2=0; 
+ 7b0:	14 bc       	out	0x24, r1	; 36
+	
     sei();
- 70a:	78 94       	sei
+ 7b2:	78 94       	sei
 	inicjalizacjaLCD();
- 70c:	0e 94 77 00 	call	0xee	; 0xee <inicjalizacjaLCD>
+ 7b4:	0e 94 77 00 	call	0xee	; 0xee <inicjalizacjaLCD>
 	//char tekst1[]={'M','a','k','s','y','m','i','u','k',' ','K','.'};
 	//char tekst2[]={'P','r','z','y','c','i','s','k',' ','n','r',':'};
 	
 	czyscLCD();
- 710:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
- 714:	ff cf       	rjmp	.-2      	; 0x714 <main+0x2a>
+ 7b8:	0e 94 65 00 	call	0xca	; 0xca <czyscLCD>
+ 7bc:	ff cf       	rjmp	.-2      	; 0x7bc <main+0x3c>
 
-00000716 <_exit>:
- 716:	f8 94       	cli
+000007be <stoper>:
+}
+void timer(){
+	if(time%2==0)
+		PORTC++;
+}
+void stoper(){
+ 7be:	0f 93       	push	r16
+ 7c0:	1f 93       	push	r17
+ 7c2:	df 93       	push	r29
+ 7c4:	cf 93       	push	r28
+ 7c6:	00 d0       	rcall	.+0      	; 0x7c8 <stoper+0xa>
+ 7c8:	0f 92       	push	r0
+ 7ca:	cd b7       	in	r28, 0x3d	; 61
+ 7cc:	de b7       	in	r29, 0x3e	; 62
+	if(time==0){
+ 7ce:	20 91 cd 00 	lds	r18, 0x00CD
+ 7d2:	22 23       	and	r18, r18
+ 7d4:	51 f4       	brne	.+20     	; 0x7ea <stoper+0x2c>
+		ustawKursor(0,14);
+ 7d6:	80 e0       	ldi	r24, 0x00	; 0
+ 7d8:	6e e0       	ldi	r22, 0x0E	; 14
+ 7da:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+		napisz("00",2);
+ 7de:	81 ec       	ldi	r24, 0xC1	; 193
+ 7e0:	90 e0       	ldi	r25, 0x00	; 0
+ 7e2:	62 e0       	ldi	r22, 0x02	; 2
+ 7e4:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+ 7e8:	3f c0       	rjmp	.+126    	; 0x868 <__stack+0x9>
+	} else if(time%4==0){	
+ 7ea:	82 2f       	mov	r24, r18
+ 7ec:	90 e0       	ldi	r25, 0x00	; 0
+ 7ee:	83 70       	andi	r24, 0x03	; 3
+ 7f0:	90 70       	andi	r25, 0x00	; 0
+ 7f2:	89 2b       	or	r24, r25
+ 7f4:	c9 f5       	brne	.+114    	; 0x868 <__stack+0x9>
+		if(time>=239){
+ 7f6:	2f 3e       	cpi	r18, 0xEF	; 239
+ 7f8:	28 f0       	brcs	.+10     	; 0x804 <stoper+0x46>
+			time=0;
+ 7fa:	10 92 cd 00 	sts	0x00CD, r1
+			PORTC=0x00;
+ 7fe:	15 ba       	out	0x15, r1	; 21
+			progTrwa=0;
+ 800:	10 92 cb 00 	sts	0x00CB, r1
+		}
+  		char bufor [3];
+  		itoa(time/4,bufor,10);
+ 804:	80 91 cd 00 	lds	r24, 0x00CD
+ 808:	86 95       	lsr	r24
+ 80a:	86 95       	lsr	r24
+ 80c:	90 e0       	ldi	r25, 0x00	; 0
+ 80e:	8e 01       	movw	r16, r28
+ 810:	0f 5f       	subi	r16, 0xFF	; 255
+ 812:	1f 4f       	sbci	r17, 0xFF	; 255
+ 814:	b8 01       	movw	r22, r16
+ 816:	4a e0       	ldi	r20, 0x0A	; 10
+ 818:	50 e0       	ldi	r21, 0x00	; 0
+ 81a:	0e 94 71 04 	call	0x8e2	; 0x8e2 <itoa>
+		if(time<40){
+ 81e:	80 91 cd 00 	lds	r24, 0x00CD
+ 822:	88 32       	cpi	r24, 0x28	; 40
+ 824:	98 f4       	brcc	.+38     	; 0x84c <stoper+0x8e>
+			ustawKursor(0,14);
+ 826:	80 e0       	ldi	r24, 0x00	; 0
+ 828:	6e e0       	ldi	r22, 0x0E	; 14
+ 82a:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+			napisz("0",1);
+ 82e:	84 ec       	ldi	r24, 0xC4	; 196
+ 830:	90 e0       	ldi	r25, 0x00	; 0
+ 832:	61 e0       	ldi	r22, 0x01	; 1
+ 834:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+			czyscLCD_y(15);
+ 838:	8f e0       	ldi	r24, 0x0F	; 15
+ 83a:	0e 94 e7 00 	call	0x1ce	; 0x1ce <czyscLCD_y>
+			ustawKursor(0,15);
+ 83e:	80 e0       	ldi	r24, 0x00	; 0
+ 840:	6f e0       	ldi	r22, 0x0F	; 15
+ 842:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+			napisz(bufor,1);
+ 846:	c8 01       	movw	r24, r16
+ 848:	61 e0       	ldi	r22, 0x01	; 1
+ 84a:	09 c0       	rjmp	.+18     	; 0x85e <stoper+0xa0>
+		} else {
+			czyscLCD_y(14);
+ 84c:	8e e0       	ldi	r24, 0x0E	; 14
+ 84e:	0e 94 e7 00 	call	0x1ce	; 0x1ce <czyscLCD_y>
+			ustawKursor(0,14);
+ 852:	80 e0       	ldi	r24, 0x00	; 0
+ 854:	6e e0       	ldi	r22, 0x0E	; 14
+ 856:	0e 94 a7 00 	call	0x14e	; 0x14e <ustawKursor>
+			napisz(bufor,2);
+ 85a:	c8 01       	movw	r24, r16
+ 85c:	62 e0       	ldi	r22, 0x02	; 2
+ 85e:	0e 94 cc 00 	call	0x198	; 0x198 <napisz>
+		}
+		PORTC++;
+ 862:	85 b3       	in	r24, 0x15	; 21
+ 864:	8f 5f       	subi	r24, 0xFF	; 255
+ 866:	85 bb       	out	0x15, r24	; 21
+	}
+}
+ 868:	0f 90       	pop	r0
+ 86a:	0f 90       	pop	r0
+ 86c:	0f 90       	pop	r0
+ 86e:	cf 91       	pop	r28
+ 870:	df 91       	pop	r29
+ 872:	1f 91       	pop	r17
+ 874:	0f 91       	pop	r16
+ 876:	08 95       	ret
 
-00000718 <__stop_program>:
- 718:	ff cf       	rjmp	.-2      	; 0x718 <__stop_program>
+00000878 <__vector_4>:
+ 
+ISR(TIMER0_COMP_vect) { // przerwanie timer0
+	klawiatura();   
+}
+
+ISR(TIMER2_COMP_vect) { // przerwanie timer2
+ 878:	1f 92       	push	r1
+ 87a:	0f 92       	push	r0
+ 87c:	0f b6       	in	r0, 0x3f	; 63
+ 87e:	0f 92       	push	r0
+ 880:	11 24       	eor	r1, r1
+ 882:	2f 93       	push	r18
+ 884:	3f 93       	push	r19
+ 886:	4f 93       	push	r20
+ 888:	5f 93       	push	r21
+ 88a:	6f 93       	push	r22
+ 88c:	7f 93       	push	r23
+ 88e:	8f 93       	push	r24
+ 890:	9f 93       	push	r25
+ 892:	af 93       	push	r26
+ 894:	bf 93       	push	r27
+ 896:	ef 93       	push	r30
+ 898:	ff 93       	push	r31
+	time++;
+ 89a:	80 91 cd 00 	lds	r24, 0x00CD
+ 89e:	8f 5f       	subi	r24, 0xFF	; 255
+ 8a0:	80 93 cd 00 	sts	0x00CD, r24
+	if(progTrwa==2)
+ 8a4:	90 91 cb 00 	lds	r25, 0x00CB
+ 8a8:	92 30       	cpi	r25, 0x02	; 2
+ 8aa:	31 f4       	brne	.+12     	; 0x8b8 <__vector_4+0x40>
+	if(progTrwa==3){
+		stoper();
+	}
+}
+void timer(){
+	if(time%2==0)
+ 8ac:	80 fd       	sbrc	r24, 0
+ 8ae:	08 c0       	rjmp	.+16     	; 0x8c0 <__vector_4+0x48>
+		PORTC++;
+ 8b0:	85 b3       	in	r24, 0x15	; 21
+ 8b2:	8f 5f       	subi	r24, 0xFF	; 255
+ 8b4:	85 bb       	out	0x15, r24	; 21
+ 8b6:	04 c0       	rjmp	.+8      	; 0x8c0 <__vector_4+0x48>
+
+ISR(TIMER2_COMP_vect) { // przerwanie timer2
+	time++;
+	if(progTrwa==2)
+		timer();
+	if(progTrwa==3){
+ 8b8:	93 30       	cpi	r25, 0x03	; 3
+ 8ba:	11 f4       	brne	.+4      	; 0x8c0 <__vector_4+0x48>
+		stoper();
+ 8bc:	0e 94 df 03 	call	0x7be	; 0x7be <stoper>
+	}
+}
+ 8c0:	ff 91       	pop	r31
+ 8c2:	ef 91       	pop	r30
+ 8c4:	bf 91       	pop	r27
+ 8c6:	af 91       	pop	r26
+ 8c8:	9f 91       	pop	r25
+ 8ca:	8f 91       	pop	r24
+ 8cc:	7f 91       	pop	r23
+ 8ce:	6f 91       	pop	r22
+ 8d0:	5f 91       	pop	r21
+ 8d2:	4f 91       	pop	r20
+ 8d4:	3f 91       	pop	r19
+ 8d6:	2f 91       	pop	r18
+ 8d8:	0f 90       	pop	r0
+ 8da:	0f be       	out	0x3f, r0	; 63
+ 8dc:	0f 90       	pop	r0
+ 8de:	1f 90       	pop	r1
+ 8e0:	18 95       	reti
+
+000008e2 <itoa>:
+ 8e2:	fb 01       	movw	r30, r22
+ 8e4:	9f 01       	movw	r18, r30
+ 8e6:	e8 94       	clt
+ 8e8:	42 30       	cpi	r20, 0x02	; 2
+ 8ea:	c4 f0       	brlt	.+48     	; 0x91c <itoa+0x3a>
+ 8ec:	45 32       	cpi	r20, 0x25	; 37
+ 8ee:	b4 f4       	brge	.+44     	; 0x91c <itoa+0x3a>
+ 8f0:	4a 30       	cpi	r20, 0x0A	; 10
+ 8f2:	29 f4       	brne	.+10     	; 0x8fe <itoa+0x1c>
+ 8f4:	97 fb       	bst	r25, 7
+ 8f6:	1e f4       	brtc	.+6      	; 0x8fe <itoa+0x1c>
+ 8f8:	90 95       	com	r25
+ 8fa:	81 95       	neg	r24
+ 8fc:	9f 4f       	sbci	r25, 0xFF	; 255
+ 8fe:	64 2f       	mov	r22, r20
+ 900:	77 27       	eor	r23, r23
+ 902:	0e 94 a2 04 	call	0x944	; 0x944 <__udivmodhi4>
+ 906:	80 5d       	subi	r24, 0xD0	; 208
+ 908:	8a 33       	cpi	r24, 0x3A	; 58
+ 90a:	0c f0       	brlt	.+2      	; 0x90e <itoa+0x2c>
+ 90c:	89 5d       	subi	r24, 0xD9	; 217
+ 90e:	81 93       	st	Z+, r24
+ 910:	cb 01       	movw	r24, r22
+ 912:	00 97       	sbiw	r24, 0x00	; 0
+ 914:	a1 f7       	brne	.-24     	; 0x8fe <itoa+0x1c>
+ 916:	16 f4       	brtc	.+4      	; 0x91c <itoa+0x3a>
+ 918:	5d e2       	ldi	r21, 0x2D	; 45
+ 91a:	51 93       	st	Z+, r21
+ 91c:	10 82       	st	Z, r1
+ 91e:	c9 01       	movw	r24, r18
+ 920:	0c 94 92 04 	jmp	0x924	; 0x924 <strrev>
+
+00000924 <strrev>:
+ 924:	dc 01       	movw	r26, r24
+ 926:	fc 01       	movw	r30, r24
+ 928:	67 2f       	mov	r22, r23
+ 92a:	71 91       	ld	r23, Z+
+ 92c:	77 23       	and	r23, r23
+ 92e:	e1 f7       	brne	.-8      	; 0x928 <strrev+0x4>
+ 930:	32 97       	sbiw	r30, 0x02	; 2
+ 932:	04 c0       	rjmp	.+8      	; 0x93c <strrev+0x18>
+ 934:	7c 91       	ld	r23, X
+ 936:	6d 93       	st	X+, r22
+ 938:	70 83       	st	Z, r23
+ 93a:	62 91       	ld	r22, -Z
+ 93c:	ae 17       	cp	r26, r30
+ 93e:	bf 07       	cpc	r27, r31
+ 940:	c8 f3       	brcs	.-14     	; 0x934 <strrev+0x10>
+ 942:	08 95       	ret
+
+00000944 <__udivmodhi4>:
+ 944:	aa 1b       	sub	r26, r26
+ 946:	bb 1b       	sub	r27, r27
+ 948:	51 e1       	ldi	r21, 0x11	; 17
+ 94a:	07 c0       	rjmp	.+14     	; 0x95a <__udivmodhi4_ep>
+
+0000094c <__udivmodhi4_loop>:
+ 94c:	aa 1f       	adc	r26, r26
+ 94e:	bb 1f       	adc	r27, r27
+ 950:	a6 17       	cp	r26, r22
+ 952:	b7 07       	cpc	r27, r23
+ 954:	10 f0       	brcs	.+4      	; 0x95a <__udivmodhi4_ep>
+ 956:	a6 1b       	sub	r26, r22
+ 958:	b7 0b       	sbc	r27, r23
+
+0000095a <__udivmodhi4_ep>:
+ 95a:	88 1f       	adc	r24, r24
+ 95c:	99 1f       	adc	r25, r25
+ 95e:	5a 95       	dec	r21
+ 960:	a9 f7       	brne	.-22     	; 0x94c <__udivmodhi4_loop>
+ 962:	80 95       	com	r24
+ 964:	90 95       	com	r25
+ 966:	bc 01       	movw	r22, r24
+ 968:	cd 01       	movw	r24, r26
+ 96a:	08 95       	ret
+
+0000096c <_exit>:
+ 96c:	f8 94       	cli
+
+0000096e <__stop_program>:
+ 96e:	ff cf       	rjmp	.-2      	; 0x96e <__stop_program>

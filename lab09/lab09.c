@@ -23,9 +23,9 @@ char menuProgram=1;
 char menuPom=0;
 char progTrwa=0;
 char wykryjPrzycisk=0;
+uint8_t time=0;
 void wypisz(uint8_t b,int command_mode)
 {
-	//uint8_t temp = LCD_PORT;
 	if(command_mode){
 		LCD_PORT &= ~(_BV(LCD_RS)); //przestawia na lini RS wartosc na 0 po to by wyslac komende a nie dane
 	} else {
@@ -105,10 +105,45 @@ void czyscLCD_y(unsigned char y){
 ISR(TIMER0_COMP_vect) { // przerwanie timer0
 	klawiatura();   
 }
-/*
+
 ISR(TIMER2_COMP_vect) { // przerwanie timer2
+	time++;
+	if(progTrwa==2)
+		timer();
+	if(progTrwa==3){
+		stoper();
+	}
 }
-*/
+void timer(){
+	if(time%2==0)
+		PORTC++;
+}
+void stoper(){
+	if(time==0){
+		ustawKursor(0,14);
+		napisz("00",2);
+	} else if(time%4==0){	
+		if(time>=239){
+			time=0;
+			PORTC=0x00;
+			progTrwa=0;
+		}
+  		char bufor [3];
+  		itoa(time/4,bufor,10);
+		if(time<40){
+			ustawKursor(0,14);
+			napisz("0",1);
+			czyscLCD_y(15);
+			ustawKursor(0,15);
+			napisz(bufor,1);
+		} else {
+			czyscLCD_y(14);
+			ustawKursor(0,14);
+			napisz(bufor,2);
+		}
+		PORTC++;
+	}
+}
 void klawiatura(){
 	uint8_t i,wyjscie = 0x00;
 	for (i=4 ; i<8 ; i++){
@@ -129,7 +164,7 @@ void klawiatura(){
 						liniaMenu--;
 						menu3();	
 					}
-				} else if (i==4 && wykryjPrzycisk==1){
+				} else if (i==4 && wykryjPrzycisk==1){ // przycisk 1
 					wyjscie=0x01;
 					czyscLCD_y(15);
 					ustawKursor(0,15);
@@ -144,24 +179,35 @@ void klawiatura(){
 					} else if(idMenu==1 && menuProgram==2 && liniaMenu!=2){
 						liniaMenu++;
 						menu2();
-						
 					} else if(idMenu==1 && menuProgram==3 && liniaMenu!=2){
 						liniaMenu++;
 						menu3();
-						
 					}
-				} else if (i==4 && wykryjPrzycisk==1){
+				} else if (i==4 && wykryjPrzycisk==1){ // przycisk 4
 					wyjscie=0x02;
 					czyscLCD_y(15);
 					ustawKursor(0,15);
 					napisz("4",1);
-				}
+				} 
+				/* tutaj nale¿y dopisaæ obsluge przyciskow
+				else if (i==5 && wykryjPrzycisk==2){ // przycisk 5
+					if(progTrwa==0)
+						progTrwa=3;
+					if(progTrwa!=0)
+						progTrwa=0;
+				} else if (i==6 && wykryjPrzycisk==2){ // przycisk 6
+					time=0;
+					PORTC=0x00;
+				} 
+				*/
 		        break;
 		   case 0b00001011: // clear(escape) 
 				if (i==7) {
 					wykryjPrzycisk=0;
 					progTrwa=0;
-					//menuPom=0;
+					PORTC=0x00;
+					if(progTrwa==0)
+						czyscLCD();
 					if(menuProgram==2){
 						menuProgram=1;
 						liniaMenu=2;
@@ -175,7 +221,7 @@ void klawiatura(){
 						menu();
 					else if (menuProgram==2)
 						menu2();
-				} else if (i==4 && wykryjPrzycisk==1){
+				} else if (i==4 && wykryjPrzycisk==1){ // przycisk 7
 					wyjscie=0x04;
 					czyscLCD_y(15);
 					ustawKursor(0,15);
@@ -193,26 +239,53 @@ void klawiatura(){
 						menu2();
 					else if (menuProgram==3)
 						menu3();
+					if (menuProgram==1 && idMenu==2 && liniaMenu==1){
+						//przyciski
+						czyscLCD();
+						napisz("Przycisk nr: ", 13);
+						progTrwa=1;
+						wykryjPrzycisk=1;
+					}
+					if (menuProgram==2 && idMenu==2 && liniaMenu==1){
+						//timer
+						progTrwa=2;
+						time=0;
+						PORTC=0x00;
+					}
+					if (menuProgram==2 && idMenu==2 && liniaMenu==2){
+						//stoper
+						/* ustaw zmienn¹, ¿eby zezwoliæ na obs³ugê 5 i 6
+						wykryjPrzycisk=2; 
+						*/
+						progTrwa=3;
+						time=0;
+						PORTC=0x00;
+						czyscLCD();
+						napisz("CZAS:", 5);
+					}
 					if (menuProgram==3 && idMenu==2 && liniaMenu==1){
+						//przejscie do menu1
 						menuProgram=1;
 						menu1();
 						idMenu=1;	
 					}
 					if (menuProgram==3 && idMenu==2 && liniaMenu==2){
+						//diody
 						idMenu=1;
 						diody();
 						PORTC=0x00;	
 					}
+					
 				}					
 		        break;
 		   default:
 		        break;	
 		};	
-		//PORTC = liniaMenu;
 	}
 }
 
 void menu(){
+	PORTC=0x00;
 	if (idMenu == 0){
 		menuProgram=1;
 		menuPom=0;
@@ -341,14 +414,14 @@ int main(void)
 	// timer0
     TCCR0 |= 1 << WGM01 | 1 << CS00 | 1 << CS02; // tryb CTC i preskaler 1024
     TIMSK |= 1 << OCIE0;// | 1<<OCIE2; // flaga przepe³nienia
-    OCR0 = 10; // czas 5ms 
+    OCR0 = 10; // czas 10ms 
     TCNT0 = 0; // wartoœæ startowa timera
-	/* timer2
+	// timer2
 	TIMSK |= 1<<OCIE2;
-	TCCR2 |= 1 << WGM01 | 1 << CS00 | 1 << CS02;
-	OCR2=10;
-	TCNT2=0;
-	*/
+	TCCR2 |= 1 << WGM01 | 1 << CS00 | 1 << CS02; // tryb CTC i preskaler 1024
+	OCR2=250; // czas 250ms
+	TCNT2=0; 
+	
     sei();
 	inicjalizacjaLCD();
 	//char tekst1[]={'M','a','k','s','y','m','i','u','k',' ','K','.'};
